@@ -1,0 +1,9 @@
+../Core/Src/main.c:71:5:main	8	static
+../Core/Src/main.c:120:6:SystemClock_Config	88	static
+../Core/Src/main.c:157:6:init_system	8	static
+../Core/Src/main.c:166:6:delay_ms	16	static
+../Core/Src/main.c:170:6:OpenOutput	16	static
+../Core/Src/main.c:177:6:CloseOutput	16	static
+../Core/Src/main.c:184:6:TestOutput	16	static
+../Core/Src/main.c:194:6:ReverseOutput	16	static
+../Core/Src/main.c:210:6:Error_Handler	4	static,ignoring_inline_asm
