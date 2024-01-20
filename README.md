@@ -1,9 +1,16 @@
-## BKIT ARM 4 - LAB 01: Khảo sát GPIO (dùng Delay)
-- Biết cách sử dụng phần mềm STM32CubeIDE để xây dựng ứng dụng trên vi điều khiển;
-- Biết cách config và lập trình các chân GPIO;
-- Biết cách điều khiển các ngoại vi liên quan đến GPIO trên kit thí nghiệm;
+# Danh sách bài dạy
 
-## Hướng dẫn Build, Run
-- Bước 1: Import Project vào STM32CubeIDE (File -> Open Projects From File System...);
-- Bước 2: Build project;
-- Bước 3: Run;
+Bài 1 - GPIO, Delay
+
+Bài 2 - Timer:
+
+* 2.1. Làm quen với Timer
+* 2.2. Sử dụng 1 Timer chung
+
+Bài 3 - LCD, Button
+
+Bài 4:
+
+## Ứng dụng
+
+[STM32Cube IDE and Programer](https://drive.google.com/drive/folders/1yH3eZkApmjC20_wG_3Dd8LRj58xgJZOC?usp=sharing)
