@@ -11,6 +11,6 @@ Bài 3 - LCD, Button
 
 Bài 4:
 
-## Ứng dụng
+# Ứng dụng
 
 [STM32Cube IDE and Programer](https://drive.google.com/drive/folders/1yH3eZkApmjC20_wG_3Dd8LRj58xgJZOC?usp=sharing)
