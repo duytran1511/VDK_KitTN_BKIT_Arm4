@@ -64,6 +64,11 @@ void OpenOutput(int index);
 void CloseOutput(int index);
 void TestOutput(void);
 void ReverseOutput(int index);
+
+void Led_0();
+unsigned char statusLed_0 = 0;
+void Led_1();
+unsigned char statusLed_1 = 0;
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -90,7 +95,7 @@ int main(void) {
 	CloseOutput(0);
 
 	OpenOutput(1);
-	delay_ms(5000);
+	delay_ms(2000);
 	CloseOutput(1);
 	/* USER CODE END Init */
 
@@ -106,13 +111,13 @@ int main(void) {
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
-		if (flag_timer2 == 1) {
-			flag_timer2 = 0;
+		if (timer2_flag == 1) {
+			timer2_flag = 0;
 			ReverseOutput(1);
 		}
 
-		if (flag_timer3 == 1) {
-			flag_timer3 = 0;
+		if (timer3_flag == 1) {
+			timer3_flag = 0;
 			ReverseOutput(0);
 		}
 
@@ -171,10 +176,10 @@ void init_system(void) {
 	HAL_Init();
 	MX_GPIO_Init();
 
-	init_timer2();
-	init_timer3();
-	set_timer2(1000);
-	set_timer3(5000);
+	timer2_init();
+	timer3_init();
+	timer2_set(1000);
+	timer3_set(5000);
 
 	delay_ms(1000);
 }
@@ -215,6 +220,22 @@ void ReverseOutput(int index) {
 		OpenOutput(index);
 		statusOutput[index] = ON;
 	}
+}
+
+void Led_0() {
+	statusLed_0 = (statusLed_0 + 1) % 20;	// 50 (ms) * 20 = 1000 ms
+	if (statusLed_1 < 4)
+		OpenOutput(0);
+	else
+		CloseOutput(0);
+}
+
+void Led_1() {
+	statusLed_1 = (statusLed_1 + 1) % 40;	// 50 (ms) * 40 = 2000 ms
+	if (statusLed_1 < 10)
+		OpenOutput(1);
+	else
+		CloseOutput(1);
 }
 /* USER CODE END 4 */
 
