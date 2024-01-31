@@ -18,4 +18,8 @@
 
 
 ## Ứng dụng lập trình và nạp code
-[STM32Cube IDE and Programer](https://drive.google.com/drive/folders/1yH3eZkApmjC20_wG_3Dd8LRj58xgJZOC?usp=sharing)
+[STM32Cube IDE](https://www.st.com/en/development-tools/stm32cubeide.html)
+
+[STM32Cube Programer](https://www.st.com/en/development-tools/stm32cubeprog.html)
+
+[STM32Cube IDE và Programer đã tải sẵn](https://drive.google.com/drive/folders/1yH3eZkApmjC20_wG_3Dd8LRj58xgJZOC?usp=sharing)
