@@ -6,6 +6,8 @@
 #include "software_timer.h"
 #include "tim.h"
 
+#include "led_7seg.h"
+
 /* Variables */
 uint8_t timer2_flag = 0;
 uint16_t timer2_counter = 0;
@@ -25,17 +27,14 @@ uint16_t timer4_mul = 0;
  * @retval 	None
  */
 void timer2_init(void) {
-	MX_TIM2_Init();
 	HAL_TIM_Base_Start_IT(&htim2);
 }
 
 void timer3_init(void) {
-	MX_TIM3_Init();
 	HAL_TIM_Base_Start_IT(&htim3);
 }
 
 void timer4_init(void) {
-	MX_TIM4_Init();
 	HAL_TIM_Base_Start_IT(&htim4);
 }
 
@@ -97,6 +96,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 				timer4_counter = timer4_mul;
 			}
 		}
+
+		led_7seg_display();
 	}
 }
 

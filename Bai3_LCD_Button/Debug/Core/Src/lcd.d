@@ -1,5 +1,6 @@
-Core/Src/lcd.o: ../Core/Src/lcd.c ../Core/Inc/lcd.h ../Core/Inc/gpio.h \
- ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
+Core/Src/lcd.o: ../Core/Src/lcd.c ../Core/Inc/lcd_font.h \
+ ../Core/Inc/lcd.h ../Core/Inc/gpio.h ../Core/Inc/main.h \
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h \
@@ -29,7 +30,8 @@ Core/Src/lcd.o: ../Core/Src/lcd.c ../Core/Inc/lcd.h ../Core/Inc/gpio.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- ../Core/Inc/lcdfont.h
+ ../Core/Inc/fsmc.h
+../Core/Inc/lcd_font.h:
 ../Core/Inc/lcd.h:
 ../Core/Inc/gpio.h:
 ../Core/Inc/main.h:
@@ -63,4 +65,4 @@ Core/Src/lcd.o: ../Core/Src/lcd.c ../Core/Inc/lcd.h ../Core/Inc/gpio.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
-../Core/Inc/lcdfont.h:
+../Core/Inc/fsmc.h:

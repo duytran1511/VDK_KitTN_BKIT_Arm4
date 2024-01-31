@@ -2,6 +2,7 @@
 "./Core/Src/fsmc.o"
 "./Core/Src/gpio.o"
 "./Core/Src/lcd.o"
+"./Core/Src/led.o"
 "./Core/Src/led_7seg.o"
 "./Core/Src/main.o"
 "./Core/Src/picture.o"

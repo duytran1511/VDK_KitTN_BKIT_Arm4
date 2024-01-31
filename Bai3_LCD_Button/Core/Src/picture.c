@@ -1,11 +1,11 @@
 /*
  * picture.c
- *
- *  Created on: Oct 30, 2023
- *      Author: phamv
  */
+
+/* Includes */
 #include "picture.h"
 
+/* Variables */
 const unsigned char gImage_pic[86400] = { /* 0X10,0X10,0X00,0XF0,0X00,0XB4,0X01,0X1B, */
 0XC8,0X88,0XC8,0X88,0XC8,0X88,0XC8,0X88,0XC8,0X88,0XC8,0X88,0XC8,0X88,0XC8,0X88,
 0XC8,0X88,0XC8,0X88,0XC8,0X88,0XC8,0X88,0XC8,0X88,0XC8,0X88,0XC8,0X88,0XC8,0X88,

@@ -1,21 +1,23 @@
 /*
  * software_timer.h
- *
- *  Created on: Sep 24, 2023
- *      Author: HaHuyen
  */
 
 #ifndef INC_SOFTWARE_TIMER_H_
 #define INC_SOFTWARE_TIMER_H_
 
-#include "software_timer.h"
+/* Includes */
+#include "stdint.h"
 
-#include "tim.h"
-#include "led_7seg.h"
+/* Includes */
+#define TIMER_CYCLE_2 1
+#define TIMER_CYCLE_3 1
+#define TIMER_CYCLE_4 1
 
-extern uint16_t flag_timer2;
+/* Variables */
+extern uint8_t timer2_flag;
 
-void timer_init();
-void setTimer2(uint16_t duration);
+/* Functions */
+extern void timer2_init(void);
+extern void timer2_set(int ms);
 
 #endif /* INC_SOFTWARE_TIMER_H_ */

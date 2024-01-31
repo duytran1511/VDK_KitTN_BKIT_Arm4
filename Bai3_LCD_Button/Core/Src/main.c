@@ -27,6 +27,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
+#include "led.h"
 #include "led_7seg.h"
 #include "button.h"
 #include "lcd.h"
@@ -103,7 +104,7 @@ int main(void)
   MX_FSMC_Init();
   /* USER CODE BEGIN 2 */
   system_init();
-  lcd_Clear(WHITE);
+  lcd_clear(WHITE);
   test_lcd();
   /* USER CODE END 2 */
 
@@ -111,9 +112,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  while(!flag_timer2);
-	  flag_timer2 = 0;
-	  button_Scan();
+	  while(!timer2_flag);
+	  timer2_flag = 0;
+	  button_scan();
 	  test_button();
 
     /* USER CODE END WHILE */
@@ -172,11 +173,11 @@ void system_init(){
 	  HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 0);
 	  HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 0);
 	  HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 0);
-	  timer_init();
-	  led7_init();
+	  timer2_init();
+	  led_7seg_init();
 	  button_init();
 	  lcd_init();
-	  setTimer2(50);
+	  timer2_set(50);
 }
 
 uint8_t count_led_debug = 0;
@@ -209,10 +210,10 @@ void test_LedY1(){
 }
 
 void test_7seg(){
-	led7_SetDigit(0, 0, 0);
-	led7_SetDigit(5, 1, 0);
-	led7_SetDigit(4, 2, 0);
-	led7_SetDigit(7, 3, 0);
+	led_7seg_set_digit(0, 0, 0);
+	led_7seg_set_digit(5, 1, 0);
+	led_7seg_set_digit(4, 2, 0);
+	led_7seg_set_digit(7, 3, 0);
 }
 void test_button(){
 	for(int i = 0; i < 16; i++){
@@ -222,7 +223,7 @@ void test_button(){
 	}
 }
 void test_lcd(){
-	lcd_Fill(0, 0, 240, 20, BLUE);
+	lcd_fill(0, 0, 240, 20, BLUE);
 	lcd_StrCenter(0, 2, "Hello World !!!", RED, BLUE, 16, 1);
 	lcd_ShowStr(20, 30, "Test lcd screen", WHITE, RED, 24, 0);
 	lcd_DrawCircle(60, 120, GREEN, 40, 1);

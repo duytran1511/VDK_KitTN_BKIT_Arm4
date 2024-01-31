@@ -1,12 +1,9 @@
 /*
  * lcdfont.h
- *
- *  Created on: Sep 25, 2023
- *      Author: HaHuyen
  */
 
-#ifndef INC_LCDFONT_H_
-#define INC_LCDFONT_H_
+#ifndef INC_LCD_FONT_H_
+#define INC_LCD_FONT_H_
 
 const unsigned char ascii_1206[][12]={
 {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00},/*" ",0*/
@@ -589,4 +586,4 @@ const typFNT_GB32 tfont32[]={
 };
 
 
-#endif /* INC_LCDFONT_H_ */
+#endif /* INC_LCD_FONT_H_ */

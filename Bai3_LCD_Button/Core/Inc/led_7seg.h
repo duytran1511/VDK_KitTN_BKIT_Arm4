@@ -1,21 +1,22 @@
 /*
  * led_7seg.h
- *
- *  Created on: Sep 25, 2023
- *      Author: HaHuyen
  */
 
-#ifndef INC_LED7SEG_H_
-#define INC_LED7SEG_H_
+#ifndef INC_LED_7SEG_H_
+#define INC_LED_7SEG_H_
 
-#include "spi.h"
+/* Includes */
+#include "stdint.h"
 
-void led7_init();
-void led7_Scan();
-void led7_SetDigit(int num, int position, uint8_t show_dot);
-void led7_SetColon(uint8_t status);
+/* Variables */
 
-void led_On(uint8_t index);
-void led_Off(uint8_t index);
+/* Functions */
+extern void led_7seg_init();
+extern void led_7seg_set_digit(int num, int position, uint8_t show_dot);
+extern void led_7seg_set_colon(uint8_t status);
+extern void led_7seg_display();
 
-#endif /* INC_LED7SEG_H_ */
+extern void led_7seg_debug_turn_on(uint8_t index);
+extern void led_7seg_debug_turn_off(uint8_t index);
+
+#endif /* INC_LED_7SEG_H_ */

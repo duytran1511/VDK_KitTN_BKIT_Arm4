@@ -75,7 +75,21 @@ int main(void) {
 
 	/* MCU Configuration--------------------------------------------------------*/
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
+
 	/* USER CODE BEGIN Init */
+
+	/* USER CODE END Init */
+
+	/* Configure the system clock */
+	/* USER CODE BEGIN SysInit */
+	SystemClock_Config();
+	/* USER CODE END SysInit */
+
+	/* Initialize all configured peripherals */
+	MX_GPIO_Init();
+
+	/* USER CODE BEGIN 2 */
 	init_system();
 
 	OpenOutput(0);
@@ -88,15 +102,6 @@ int main(void) {
 
 	OpenOutput(0);
 	CloseOutput(1);
-	/* USER CODE END Init */
-
-	/* Configure the system clock */
-	/* USER CODE BEGIN SysInit */
-	SystemClock_Config();
-	/* USER CODE END SysInit */
-
-	/* Initialize all configured peripherals */
-	/* USER CODE BEGIN 2 */
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -156,9 +161,6 @@ void SystemClock_Config(void) {
 }
 
 void init_system(void) {
-	HAL_Init();
-	MX_GPIO_Init();
-
 	delay_ms(1000);
 }
 

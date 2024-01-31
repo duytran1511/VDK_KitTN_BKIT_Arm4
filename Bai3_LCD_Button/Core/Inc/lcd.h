@@ -1,28 +1,17 @@
 /*
  * lcd.h
- *
- *  Created on: Sep 25, 2023
- *      Author: HaHuyen
  */
-
 
 #ifndef INC_LCD_H_
 #define INC_LCD_H_
 
-/*
- * lcd.h
- *
- *  Created on: Aug 9, 2023
- *      Author: phamv
- */
-//#include "fsmc.h"
+/* Includes */
 #include "gpio.h"
-#include "stdlib.h"
-#include <string.h>
 
+/* Constants */
 #define DFT_SCAN_DIR  L2R_U2D
 
-//chinh huong
+// Direction Adjustment
 #define L2R_U2D  0x00
 #define L2R_D2U  0x80
 #define R2L_U2D  0x40
@@ -33,26 +22,10 @@
 #define D2U_L2R  0xa0
 #define D2U_R2L  0xe0
 
-
-typedef struct
-{
-	uint16_t width;
-	uint16_t height;
-	uint16_t id;
-}_lcd_dev;
-
-extern _lcd_dev lcddev;
-typedef struct
-{
-	__IO uint16_t LCD_REG;
-	__IO uint16_t LCD_RAM;
-} LCD_TypeDef;
-
+// LCD
 #define LCD_BASE        ((uint32_t)(0x60000000 | 0x000ffffe))
 #define LCD             ((LCD_TypeDef *) LCD_BASE)
-//////////////////////////////////////////////////////////////////////////////////
-
-
+// Color
 #define WHITE         	 0xFFFF
 #define BLACK         	 0x0000
 #define BLUE         	 0x001F
@@ -67,45 +40,63 @@ typedef struct
 #define BROWN 			 0XBC40
 #define BRRED 			 0XFC07
 #define GRAY  			 0X8430
-
 #define DARKBLUE      	 0X01CF
 #define LIGHTBLUE      	 0X7D7C
 #define GRAYBLUE       	 0X5458
-
-
 #define LIGHTGREEN     	 0X841F
 #define LIGHTGRAY        0XEF5B
 #define LGRAY 			 0XC618
-
 #define LGRAYBLUE        0XA651
 #define LBBLUE           0X2B12
 
-static void LCD_WR_DATA(uint16_t data);
-static uint16_t LCD_RD_DATA(void);
+/* Struct */
+typedef struct {
+	uint16_t width;
+	uint16_t height;
+	uint16_t id;
+} _lcd_dev;
 
-void lcd_SetCursor(uint16_t x,uint16_t y);
-void lcd_AddressSet(uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2);
-void lcd_DisplayOn(void);
-void lcd_DisplayOff(void);
-uint16_t lcd_ReadPoint(uint16_t x,uint16_t y);
-void lcd_Clear(uint16_t color);
+typedef struct {
+	__IO uint16_t LCD_REG;
+	__IO uint16_t LCD_RAM;
+} LCD_TypeDef;
 
-void lcd_Fill(uint16_t xsta,uint16_t ysta,uint16_t xend,uint16_t yend,uint16_t color);
-void lcd_DrawPoint(uint16_t x,uint16_t y,uint16_t color);
-void lcd_DrawLine(uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint16_t color);
-void lcd_DrawRectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,uint16_t color);
+/* Variables */
+extern _lcd_dev lcddev;
 
-void lcd_ShowChar(uint16_t x,uint16_t y,uint8_t character,uint16_t fc,uint16_t bc,uint8_t sizey,uint8_t mode);
-uint32_t mypow(uint8_t m,uint8_t n);
-void lcd_ShowIntNum(uint16_t x,uint16_t y,uint16_t num,uint8_t len,uint16_t fc,uint16_t bc,uint8_t sizey);
-void lcd_ShowFloatNum(uint16_t x,uint16_t y,float num,uint8_t len,uint16_t fc,uint16_t bc,uint8_t sizey);
+/* Functions */
+void lcd_set_cursor(uint16_t x, uint16_t y);
+void lcd_set_address(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
+void lcd_set_display_on(void);
+void lcd_set_display_off(void);
+uint16_t lcd_read_point(uint16_t x, uint16_t y);
+void lcd_clear(uint16_t color);
 
-void lcd_ShowPicture(uint16_t x,uint16_t y,uint16_t length,uint16_t width,const uint8_t pic[]);
+void lcd_fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend,
+		uint16_t color);
+void lcd_draw_point(uint16_t x, uint16_t y, uint16_t color);
+void lcd_draw_line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
+		uint16_t color);
+void lcd_draw_rectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
+		uint16_t color);
+
+void lcd_ShowChar(uint16_t x, uint16_t y, uint8_t character, uint16_t fc,
+		uint16_t bc, uint8_t sizey, uint8_t mode);
+uint32_t mypow(uint8_t m, uint8_t n);
+void lcd_ShowIntNum(uint16_t x, uint16_t y, uint16_t num, uint8_t len,
+		uint16_t fc, uint16_t bc, uint8_t sizey);
+void lcd_ShowFloatNum(uint16_t x, uint16_t y, float num, uint8_t len,
+		uint16_t fc, uint16_t bc, uint8_t sizey);
+
+void lcd_ShowPicture(uint16_t x, uint16_t y, uint16_t length, uint16_t width,
+		const uint8_t pic[]);
 
 void lcd_SetDir(uint8_t dir);
 void lcd_init(void);
 
-void lcd_DrawCircle(int xc, int yc,uint16_t c,int r, int fill);
-void lcd_ShowStr(uint16_t x, uint16_t y,char *str,uint16_t fc, uint16_t bc,uint8_t sizey,uint8_t mode);
-void lcd_StrCenter(uint16_t x, uint16_t y,char *str,uint16_t fc,uint16_t bc,uint8_t sizey,uint8_t mode);
+void lcd_DrawCircle(int xc, int yc, uint16_t c, int r, int fill);
+void lcd_ShowStr(uint16_t x, uint16_t y, char *str, uint16_t fc, uint16_t bc,
+		uint8_t sizey, uint8_t mode);
+void lcd_StrCenter(uint16_t x, uint16_t y, char *str, uint16_t fc, uint16_t bc,
+		uint8_t sizey, uint8_t mode);
 #endif /* INC_LCD_H_ */

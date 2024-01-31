@@ -55,8 +55,8 @@ unsigned char statusOutput[2] = { OFF, OFF };
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-/* USER CODE BEGIN PFP */
 void SystemClock_Config(void);
+/* USER CODE BEGIN PFP */
 void init_system(void);
 void delay_ms(int value);
 
@@ -65,10 +65,10 @@ void CloseOutput(int index);
 void TestOutput(void);
 void ReverseOutput(int index);
 
-void Led_0();
 unsigned char statusLed_0 = 0;
-void Led_1();
+void Led_0();
 unsigned char statusLed_1 = 0;
+void Led_1();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -87,7 +87,23 @@ int main(void) {
 	/* MCU Configuration--------------------------------------------------------*/
 
 	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
+
 	/* USER CODE BEGIN Init */
+	/* USER CODE END Init */
+
+	/* Configure the system clock */
+	SystemClock_Config();
+
+	/* USER CODE BEGIN SysInit */
+	/* USER CODE END SysInit */
+
+	/* Initialize all configured peripherals */
+	MX_GPIO_Init();
+	MX_TIM2_Init();
+	MX_TIM3_Init();
+	MX_TIM4_Init();
+	/* USER CODE BEGIN 2 */
 	init_system();
 
 	OpenOutput(0);
@@ -97,15 +113,6 @@ int main(void) {
 	OpenOutput(1);
 	delay_ms(2000);
 	CloseOutput(1);
-	/* USER CODE END Init */
-
-	/* Configure the system clock */
-	/* USER CODE BEGIN SysInit */
-	SystemClock_Config();
-	/* USER CODE END SysInit */
-
-	/* Initialize all configured peripherals */
-	/* USER CODE BEGIN 2 */
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -173,9 +180,6 @@ void SystemClock_Config(void) {
 
 /* USER CODE BEGIN 4 */
 void init_system(void) {
-	HAL_Init();
-	MX_GPIO_Init();
-
 	timer2_init();
 	timer3_init();
 	timer2_set(1000);
