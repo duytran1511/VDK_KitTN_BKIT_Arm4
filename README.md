@@ -14,7 +14,7 @@
 ## Tài liệu chung
 [Kit Thí nghiệm BKIT ARM4](https://abcsolutions.com.vn/index.php/kit-thi-nghiem-bkit-arm4/)
 
-[Quick Start Guide](https://abcsolutions.com.vn/wp-content/uploads/2023/11/KitThiNghiem_STM32_ARM4_QuickStartGuide_20231027_1027.pdf)
+[Hướng dẫn sử dụng](https://abcsolutions.com.vn/wp-content/uploads/2023/11/KitThiNghiem_STM32_ARM4_QuickStartGuide_20231027_1027.pdf)
 
 
 ## Ứng dụng lập trình và nạp code
