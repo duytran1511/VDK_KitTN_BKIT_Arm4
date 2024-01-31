@@ -60,8 +60,8 @@ all: main-build
 main-build: Bai3_LCD_Button.elf secondary-outputs
 
 # Tool invocations
-Bai3_LCD_Button.elf Bai3_LCD_Button.map: $(OBJS) $(USER_OBJS) C:\Users\duytr\Dropbox\project\VDK_KitTN_Arm4\Bai3_LCD_Button\STM32F407ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Bai3_LCD_Button.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\duytr\Dropbox\project\VDK_KitTN_Arm4\Bai3_LCD_Button\STM32F407ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Bai3_LCD_Button.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Bai3_LCD_Button.elf Bai3_LCD_Button.map: $(OBJS) $(USER_OBJS) D:\Bai3_LCD_Button\STM32F407ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Bai3_LCD_Button.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\Bai3_LCD_Button\STM32F407ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Bai3_LCD_Button.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

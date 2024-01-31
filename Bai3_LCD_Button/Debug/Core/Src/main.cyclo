@@ -1,10 +1,6 @@
-../Core/Src/main.c:78:5:main	2
-../Core/Src/main.c:131:6:SystemClock_Config	3
-../Core/Src/main.c:172:6:system_init	1
-../Core/Src/main.c:187:6:test_LedDebug	2
-../Core/Src/main.c:194:6:test_LedY0	2
-../Core/Src/main.c:203:6:test_LedY1	2
-../Core/Src/main.c:212:6:test_7seg	1
-../Core/Src/main.c:218:6:test_button	3
-../Core/Src/main.c:225:6:test_lcd	1
-../Core/Src/main.c:239:6:Error_Handler	1
+../Core/Src/main.c:75:5:main	2
+../Core/Src/main.c:130:6:SystemClock_Config	3
+../Core/Src/main.c:170:6:init_system	1
+../Core/Src/main.c:186:6:TestButtonMatrix	3
+../Core/Src/main.c:193:6:TestLcd	1
+../Core/Src/main.c:207:6:Error_Handler	1

@@ -6,7 +6,7 @@
 #define INC_PICTURE_H_
 
 /* Variables */
-extern const unsigned char gImage_logo[16200];
-extern const unsigned char gImage_pic[86400];
+extern const unsigned char gImageLogo[16200];
+extern const unsigned char gImagePic[86400];
 
 #endif /* INC_PICTURE_H_ */

@@ -33,10 +33,9 @@ void button_scan() {
 	HAL_GPIO_WritePin(BTN_LOAD_GPIO_Port, BTN_LOAD_Pin, 1);
 	HAL_SPI_Receive(&hspi1, (void*) &button_spi_buffer, 2, 10);
 
-	static int button_index = 0;
-	static uint16_t mask = 0x8000;
-	static int i = 0;
-	for (i = 0; i < 16; i++) {
+	int button_index = 0;
+	uint16_t mask = 0x8000;
+	for (int i = 0; i < 16; i++) {
 		if (i >= 0 && i <= 3) {
 			button_index = i + 4;
 		} else if (i >= 4 && i <= 7) {

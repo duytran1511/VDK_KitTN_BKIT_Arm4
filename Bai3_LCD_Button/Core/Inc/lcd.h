@@ -80,23 +80,22 @@ void lcd_draw_line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
 void lcd_draw_rectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
 		uint16_t color);
 
-void lcd_ShowChar(uint16_t x, uint16_t y, uint8_t character, uint16_t fc,
+void lcd_show_char(uint16_t x, uint16_t y, uint8_t character, uint16_t fc,
 		uint16_t bc, uint8_t sizey, uint8_t mode);
-uint32_t mypow(uint8_t m, uint8_t n);
-void lcd_ShowIntNum(uint16_t x, uint16_t y, uint16_t num, uint8_t len,
+void lcd_show_int_num(uint16_t x, uint16_t y, uint16_t num, uint8_t len,
 		uint16_t fc, uint16_t bc, uint8_t sizey);
-void lcd_ShowFloatNum(uint16_t x, uint16_t y, float num, uint8_t len,
+void lcd_show_float_num(uint16_t x, uint16_t y, float num, uint8_t len,
 		uint16_t fc, uint16_t bc, uint8_t sizey);
 
-void lcd_ShowPicture(uint16_t x, uint16_t y, uint16_t length, uint16_t width,
+void lcd_show_picture(uint16_t x, uint16_t y, uint16_t length, uint16_t width,
 		const uint8_t pic[]);
 
-void lcd_SetDir(uint8_t dir);
+void lcd_set_direction(uint8_t dir);
 void lcd_init(void);
 
-void lcd_DrawCircle(int xc, int yc, uint16_t c, int r, int fill);
-void lcd_ShowStr(uint16_t x, uint16_t y, char *str, uint16_t fc, uint16_t bc,
+void lcd_draw_circle(int xc, int yc, uint16_t c, int r, int fill);
+void lcd_show_string(uint16_t x, uint16_t y, char *str, uint16_t fc, uint16_t bc,
 		uint8_t sizey, uint8_t mode);
-void lcd_StrCenter(uint16_t x, uint16_t y, char *str, uint16_t fc, uint16_t bc,
+void lcd_show_string_center(uint16_t x, uint16_t y, char *str, uint16_t fc, uint16_t bc,
 		uint8_t sizey, uint8_t mode);
 #endif /* INC_LCD_H_ */
