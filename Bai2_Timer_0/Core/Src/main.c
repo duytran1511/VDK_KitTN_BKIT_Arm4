@@ -18,16 +18,16 @@
  */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include <led_7seg.h>
-#include <led.h>
-
 #include "main.h"
+
 #include "spi.h"
 #include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "led.h"
+#include "led_7seg.h"
 #include "software_timer.h"
 /* USER CODE END Includes */
 

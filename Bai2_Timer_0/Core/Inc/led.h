@@ -6,7 +6,6 @@
 #define INC_LED_H_
 
 /* Includes */
-#include "stdint.h"
 
 /* Constants */
 #define DEBUG_LED_Pin GPIO_PIN_4

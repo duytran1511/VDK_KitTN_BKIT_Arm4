@@ -19,12 +19,12 @@ extern uint8_t timer3_flag;
 extern uint8_t timer4_flag;
 
 /* Functions */
-void timer2_init(void);
-void timer3_init(void);
-void timer4_init(void);
+extern void timer2_init(void);
+extern void timer3_init(void);
+extern void timer4_init(void);
 
-void timer2_set(int ms);
-void timer3_set(int ms);
-void timer4_set(int ms);
+extern void timer2_set(int ms);
+extern void timer3_set(int ms);
+extern void timer4_set(int ms);
 
 #endif /* INC_SOFTWARE_TIMER_H_ */

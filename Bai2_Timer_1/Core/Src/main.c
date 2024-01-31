@@ -18,16 +18,16 @@
  */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include <led_7seg.h>
-#include <led.h>
-
 #include "main.h"
+
 #include "spi.h"
 #include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "led_7seg.h"
+#include "led.h"
 #include "software_timer.h"
 /* USER CODE END Includes */
 
@@ -223,7 +223,7 @@ void ReverseOutput(int index) {
 }
 
 void Led_0() {
-	statusLed_0 = (statusLed_0 + 1) % 20;	// 50 (ms) * 20 = 1000 ms
+	statusLed_0 = (statusLed_0 + 1) % 20;	// 50 (ms) * 20 = 1000 (ms)
 	if (statusLed_1 < 4)
 		OpenOutput(0);
 	else
@@ -231,7 +231,7 @@ void Led_0() {
 }
 
 void Led_1() {
-	statusLed_1 = (statusLed_1 + 1) % 40;	// 50 (ms) * 40 = 2000 ms
+	statusLed_1 = (statusLed_1 + 1) % 40;	// 50 (ms) * 40 = 2000 (ms)
 	if (statusLed_1 < 10)
 		OpenOutput(1);
 	else

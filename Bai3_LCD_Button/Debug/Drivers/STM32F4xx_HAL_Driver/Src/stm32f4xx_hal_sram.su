@@ -1,0 +1,17 @@
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:165:19:HAL_SRAM_Init	24	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:215:20:HAL_SRAM_DeInit	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:247:13:HAL_SRAM_MspInit	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:262:13:HAL_SRAM_MspDeInit	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:277:13:HAL_SRAM_DMA_XferCpltCallback	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:292:13:HAL_SRAM_DMA_XferErrorCallback	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:328:19:HAL_SRAM_Read_8b	32	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:364:19:HAL_SRAM_Write_8b	32	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:406:19:HAL_SRAM_Read_16b	32	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:442:19:HAL_SRAM_Write_16b	32	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:484:19:HAL_SRAM_Read_32b	24	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:518:19:HAL_SRAM_Write_32b	24	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:558:19:HAL_SRAM_Read_DMA	24	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:591:19:HAL_SRAM_Write_DMA	24	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:821:19:HAL_SRAM_WriteOperation_Enable	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:844:19:HAL_SRAM_WriteOperation_Disable	16	static
+../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c:889:23:HAL_SRAM_GetState	16	static
