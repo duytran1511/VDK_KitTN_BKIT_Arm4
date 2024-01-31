@@ -8,7 +8,7 @@
 * Bài 2.2: Sử dụng 1 Timer chung để định thời cho tất cả các tác vụ khác.
 
 **Bài 3 - LCD, Button**
-* Giới thiệu về thư viện button và LCD Touch Screen.
+* Giới thiệu về thư viện Nút nhấn và Màn hình LCD.
 
 # Phụ lục
 ## Tài liệu chung
