@@ -34,37 +34,37 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := Bai2_Timer_0
+BUILD_ARTIFACT_NAME := Lab2_Timer_0
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-Bai2_Timer_0.elf \
+Lab2_Timer_0.elf \
 
 MAP_FILES += \
-Bai2_Timer_0.map \
+Lab2_Timer_0.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-Bai2_Timer_0.list \
+Lab2_Timer_0.list \
 
 OBJCOPY_HEX += \
-Bai2_Timer_0.hex \
+Lab2_Timer_0.hex \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: Bai2_Timer_0.elf secondary-outputs
+main-build: Lab2_Timer_0.elf secondary-outputs
 
 # Tool invocations
-Bai2_Timer_0.elf Bai2_Timer_0.map: $(OBJS) $(USER_OBJS) C:\Users\duytr\Dropbox\project\VDK_KitTN_Arm4\Bai2_Timer_0\STM32F407ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Bai2_Timer_0.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\duytr\Dropbox\project\VDK_KitTN_Arm4\Bai2_Timer_0\STM32F407ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Bai2_Timer_0.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Lab2_Timer_0.elf Lab2_Timer_0.map: $(OBJS) $(USER_OBJS) C:\Users\duytr\Dropbox\project\VDK_KitTN_BKIT_Arm4\Lab2_Timer\Lab2_Timer_0\STM32F407ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Lab2_Timer_0.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\duytr\Dropbox\project\VDK_KitTN_BKIT_Arm4\Lab2_Timer\Lab2_Timer_0\STM32F407ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab2_Timer_0.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -73,19 +73,19 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Bai2_Timer_0.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Bai2_Timer_0.list"
+Lab2_Timer_0.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "Lab2_Timer_0.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
-Bai2_Timer_0.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "Bai2_Timer_0.hex"
+Lab2_Timer_0.hex: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "Lab2_Timer_0.hex"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) Bai2_Timer_0.elf Bai2_Timer_0.hex Bai2_Timer_0.list Bai2_Timer_0.map default.size.stdout
+	-$(RM) Lab2_Timer_0.elf Lab2_Timer_0.hex Lab2_Timer_0.list Lab2_Timer_0.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX)
