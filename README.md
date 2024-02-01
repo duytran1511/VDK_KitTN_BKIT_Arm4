@@ -10,6 +10,15 @@
 **Bài 3 - LCD, Button**
 * Giới thiệu về thư viện Nút nhấn và Màn hình LCD.
 
+**Bài 4 - Máy trạng thái**
+* Giới thiệu về Máy trạng thái - (finite-state machine FSM).
+* Thực hành bài tập Kéo cờ.
+
+**Bài 5 - Bài tập về Máy trạng thái**
+* Thực hành bài tập Đèn xi nhan.
+* Thực hành bài tập Đèn giao thông.
+* Thực hành bài tập Password Door.
+
 # Phụ lục
 ## Tài liệu chung
 [Kit Thí nghiệm BKIT ARM4](https://abcsolutions.com.vn/index.php/kit-thi-nghiem-bkit-arm4/)
