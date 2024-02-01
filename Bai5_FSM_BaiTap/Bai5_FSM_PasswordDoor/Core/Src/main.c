@@ -55,10 +55,10 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-unsigned char arrayMapOfNumber[16] = { 1, 2, 3, 'A', 4, 5, 6, 'B', 7, 8, 9, 'C',
-		'*', 0, 'E', 'D' };
+unsigned char arrayMapOfNumber[16] = { 1, 2, 3, ' ', 4, 5, 6, ' ', 7, 8, 9, ' ',
+		' ', 0, ' ', ' ' };
 unsigned char arrayMapOfPassword[5][4] = { { 1, 2, 3, 4 }, { 2, 7, 8, 9 }, { 3,
-		3, 3, 3 }, { 4, 8, 6, 8 }, { 5, 'A', 'B', 'C' }, };
+		3, 3, 3 }, { 4, 8, 6, 8 }, { 5, 1, 0, 0 }, };
 unsigned char arrayPassword[4] = { 0, 0, 0, 0 };
 uint16_t statusPassword = 0;
 uint16_t indexOfNumber = 0;
@@ -205,6 +205,7 @@ uint16_t isButtonNumber() {
 	for (i = 0; i <= 15; i++)
 		if (button_count[i] == 1) {
 			numberValue = arrayMapOfNumber[i];
+			if(numberValue == ' ') return 0;
 			return 1;
 		}
 	return 0;
@@ -212,7 +213,7 @@ uint16_t isButtonNumber() {
 
 uint16_t checkPassword() {
 	unsigned char i, j;
-	unsigned result = 1;
+	unsigned char result = 1;
 	for (i = 0; i < 5; i++) {
 		result = 1;
 		for (j = 0; j < 4; j++) {
@@ -220,7 +221,7 @@ uint16_t checkPassword() {
 				result = 0;
 		}
 		if (result == 1)
-			result = (i + 1);
+			return i + 1;
 	}
 
 	return result;
@@ -228,18 +229,18 @@ uint16_t checkPassword() {
 
 void UnlockDoor() {
 	if (flagOpen == 0) {
-		lcd_show_picture(80, 90, 77, 130, gImage_door2);
-		lcd_show_picture(80, 90, 77, 130, gImage_door3);
-		lcd_show_picture(80, 90, 80, 135, gImage_door4);
-		lcd_show_picture(80, 90, 90, 138, gImage_door5);
-		lcd_show_picture(80, 90, 98, 138, gImage_door6);
+		lcd_show_picture(80, 90, 77, 130, gImage_door_open_1);
+		lcd_show_picture(80, 90, 77, 130, gImage_door_open_2);
+		lcd_show_picture(80, 90, 80, 135, gImage_door_open_3);
+		lcd_show_picture(80, 90, 90, 138, gImage_door_open_4);
+		lcd_show_picture(80, 90, 98, 138, gImage_door_open_5);
 		flagOpen = 1;
 	}
-	lcd_show_picture(80, 90, 112, 138, gImage_door7);
+	lcd_show_picture(80, 90, 112, 138, gImage_door_open_6);
 }
 
 void LockDoor() {
-	lcd_show_picture(80, 100, 77, 130, gImage_door1);
+	lcd_show_picture(80, 100, 77, 130, gImage_door_close);
 }
 
 uint8_t isButtonEnter() {
@@ -252,14 +253,15 @@ uint8_t isButtonEnter() {
 void AppPasswordDoor() {
 	switch (statusPassword) {
 	case INIT_SYSTEM:
-		lcd_show_picture(0, 0, 240, 320, gImage_bg);
+		lcd_show_picture(0, 0, 240, 320, image_background);
 		statusPassword = LOCK_DOOR;
+
 		break;
 
 	case LOCK_DOOR:
-		lcd_show_picture(17, 25, 206, 50, gImage_press1);
-		lcd_show_picture(107, 265, 30, 32, gImage_protect);
-
+		lcd_show_picture(25, 40, 180, 49, image_press_enter_text);
+		lcd_show_picture(107, 265, 30, 32, image_protect_icon);
+		lcd_show_string_center(0, 15, "     LOCK       ", RED, WHITE, 16, 0);
 		LockDoor();
 
 		if (isButtonEnter()) {
@@ -270,12 +272,13 @@ void AppPasswordDoor() {
 			lcd_fill(30, 25, 210, 80, WHITE);		//clear text
 			lcd_fill(30, 265, 210, 300, WHITE);		//clear protect
 
-			lcd_show_picture(17, 25, 206, 48, gImage_enterPW);
-			lcd_show_picture(17, 235, 206, 30, gImage_PW);
+			lcd_show_picture(17, 40, 206, 48, image_pass_enter_text);
+			lcd_show_picture(17, 235, 206, 30, image_pass_enter);
 		}
 		break;
 
 	case ENTER_PASSWORD:
+		lcd_show_string_center(0, 12, "   ENTER PASS   ", RED, WHITE, 16, 0);
 		timeDelay++;
 		if (isButtonNumber()) {
 			lcd_show_string(70 + indexOfNumber * 30, 242, "*", BLACK, LIGHTGRAY,
@@ -296,9 +299,10 @@ void AppPasswordDoor() {
 		break;
 
 	case CHECK_PASSWORD:
+
 		timeDelay = 0;
 		if (checkPassword()) {
-			lcd_fill(30, 25, 210, 80, WHITE);		//clear text
+			lcd_fill(30, 40, 210, 80, WHITE);		//clear text
 			lcd_fill(30, 265, 210, 300, WHITE);		//clear protect
 			statusPassword = UNLOCK_DOOR;
 			timeDelay = 0;
@@ -309,6 +313,7 @@ void AppPasswordDoor() {
 		break;
 
 	case UNLOCK_DOOR:
+		lcd_show_string_center(0, 12, "    UNLOCK     ", RED, WHITE, 16, 0);
 		timeDelay++;
 		UnlockDoor();
 		if (timeDelay >= 100) {
@@ -319,9 +324,9 @@ void AppPasswordDoor() {
 
 	case WRONG_PASSWORD:
 		timeDelay++;
-		lcd_show_picture(17, 25, 206, 53, gImage_wrongPW);
-		lcd_show_picture(17, 235, 206, 30, gImage_PW);
-		lcd_show_picture(17, 265, 206, 28, gImage_wrong);
+		lcd_show_picture(17, 40, 206, 53, image_wrong_pass_text);
+		lcd_show_picture(17, 235, 206, 30, image_pass_enter);
+		lcd_show_picture(17, 265, 206, 28, image_wrong_icon);
 
 		statusPassword = ENTER_PASSWORD;
 		indexOfNumber = 0;
