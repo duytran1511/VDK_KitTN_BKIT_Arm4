@@ -19,6 +19,11 @@
 * Thực hành bài tập Đèn giao thông.
 * Thực hành bài tập Password Door.
 
+**Bài 6 - Chuẩn giao tiếp I2C và Đồng hồ thời gian thực với IC DS3231**
+* Giới thiệu chuẩn giao tiếp I2C.
+* Giới thiệu về đồng hồ thời gian thực với IC DS3231.
+* Thực hành bài tập về giao tiếp I2C và Đồng hồ thời gian thực với IC DS3231.
+
 # Phụ lục
 ## Tài liệu chung
 [Website giới thiệu Kit Thí nghiệm BKIT ARM4](https://abcsolutions.com.vn/index.php/kit-thi-nghiem-bkit-arm4/)
