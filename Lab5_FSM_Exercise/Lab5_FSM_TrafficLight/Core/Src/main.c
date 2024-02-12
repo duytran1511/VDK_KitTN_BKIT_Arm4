@@ -61,7 +61,8 @@
 #define PHASE1_YELLOW       2
 #define PHASE2_GREEN        3
 #define PHASE2_YELLOW       4
-#define WAIT                5
+
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -70,6 +71,13 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
+int timeOfGreenPhase1 = 25;
+int timeOfYellowPhase1 = 3;
+int timeOfGreenPhase2 = 20;
+int timeOfYellowPhase2 = 3;
+int timeOfLight = 0;
+int cntOfLight = 0;
+int statusOfLight = INIT;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -82,12 +90,7 @@ void appTrafficLight();
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int statusOfTrafficLight = INIT;
-int timeTraffic = 0;
-int timeGreen = 3;
-int timeYellow = 2;
-int timeRed = 5;
-int count1_s = 0;
+//int count1_s = 0;
 /* USER CODE END 0 */
 
 /**
@@ -129,8 +132,7 @@ int main(void) {
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
-		while (!timer2_flag)
-			;
+		while (!timer2_flag);
 		timer2_flag = 0;
 
 		button_scan();
@@ -242,124 +244,113 @@ void phase2Yellow() {
 	lcd_draw_circle(CX_YELLOW1, CY_YELLOW1, 0x6351, RADIUS, 1);
 }
 
-void appTrafficLight() {
-	switch (statusOfTrafficLight) {
-	case INIT:
-		lcd_clear(BLACK);
-		lcd_fill(0, 0, 240, 20, BLUE);
-		lcd_show_string_center(0, 0, "Traffic light", WHITE, BLUE, 16, 0);
-		lcd_fill(0, 300, 240, 320, BLUE);
-		lcd_show_picture(0, 20, 240, 280, gImage_traffic);
+void appTrafficLight()
+{
+    cntOfLight = (cntOfLight + 1)%20;
+    if (cntOfLight == 0){
+    	//every 1s
+    	timeOfLight --;
+    }
 
-		timeTraffic = timeGreen;
-		statusOfTrafficLight = AUTO_GREEN1;
-		break;
+    switch (statusOfLight)
+    {
+		case INIT:
+			lcd_clear(BLACK);
+			lcd_fill(0, 0, 240, 20, BLUE);
+			lcd_show_string_center(0, 0, "Traffic light", WHITE, BLUE, 16, 0);
+			lcd_fill(0, 300, 240, 320, BLUE);
+			lcd_show_picture(0, 20, 240, 280, gImage_traffic);
 
-	case PHASE1_GREEN:
-		phase1Green();
+			timeOfLight = timeOfGreenPhase1;
+			statusOfLight = PHASE1_GREEN;
+			break;
+        case PHASE1_GREEN:
+        	//set light
+        	phase1Green();
+            //print status
+            lcd_show_string_center(0, 302, "PHASE1 GREEN ", WHITE, BLUE, 16, 0);
+            //print counter phase1
+    		lcd_show_int_num(75, 50, timeOfLight / 10, 1, RED, 0x47e8, 32);
+    		lcd_show_int_num(90, 50, timeOfLight % 10, 1, RED, 0x47e8, 32);
+    		//print counter phase2
+    		lcd_show_int_num(15, 140, (timeOfLight + timeOfYellowPhase1) / 10, 1, RED,
+    				0x47e8, 32);
+    		lcd_show_int_num(30, 140, (timeOfLight + timeOfYellowPhase1) % 10, 1, RED,
+    				0x47e8, 32);
 
-		led_7seg_set_digit((timeTraffic + timeYellow) / 10, 0, 0);
-		led_7seg_set_digit((timeTraffic + timeYellow) % 10, 1, 0);
-		led_7seg_set_digit(timeTraffic / 10, 2, 0);
-		led_7seg_set_digit(timeTraffic % 10, 3, 0);
+            if (timeOfLight == 0)
+            {
+            	//timeout
+                statusOfLight = PHASE1_YELLOW;
+                timeOfLight = timeOfYellowPhase1;
+            }
+            break;
+        case PHASE1_YELLOW:
+        	//set light
+        	phase1Yellow();
+            //print status
+            lcd_show_string_center(0, 302, "PHASE1 YELLOW", WHITE, BLUE, 16, 0);
+            //print counter phase1
+    		lcd_show_int_num(75, 50, timeOfLight / 10, 1, RED, 0x47e8, 32);
+    		lcd_show_int_num(90, 50, timeOfLight % 10, 1, RED, 0x47e8, 32);
+    		//print counter phase1
+    		lcd_show_int_num(15, 140, timeOfLight / 10, 1, RED,
+    				0x47e8, 32);
+    		lcd_show_int_num(30, 140, timeOfLight % 10, 1, RED,
+    				0x47e8, 32);
 
-		lcd_show_int_num(75, 50, timeTraffic / 10, 1, RED, 0x47e8, 32);
-		lcd_show_int_num(90, 50, timeTraffic % 10, 1, RED, 0x47e8, 32);
-		lcd_show_int_num(15, 140, (timeTraffic + timeYellow) / 10, 1, RED,
-				0x47e8, 32);
-		lcd_show_int_num(30, 140, (timeTraffic + timeYellow) % 10, 1, RED,
-				0x47e8, 32);
+            if (timeOfLight == 0)
+            {
+            	//timeout
+                statusOfLight = PHASE2_GREEN;
+                timeOfLight = timeOfGreenPhase2;
+            }            break;
+        case PHASE2_GREEN:
+        	//set light
+        	phase2Green();
+            //print status
+            lcd_show_string_center(0, 302, "PHASE2 GREEN ", WHITE, BLUE, 16, 0);
+            //print counter phase1
+    		lcd_show_int_num(75, 50, (timeOfLight + timeOfYellowPhase2) / 10, 1, RED, 0x47e8, 32);
+    		lcd_show_int_num(90, 50, (timeOfLight + timeOfYellowPhase2) % 10, 1, RED, 0x47e8, 32);
+    		//print counter phase2
+    		lcd_show_int_num(15, 140, timeOfLight / 10, 1, RED,
+    				0x47e8, 32);
+    		lcd_show_int_num(30, 140, timeOfLight % 10, 1, RED,
+    				0x47e8, 32);
 
-		lcd_show_string_center(0, 302, " GREEN1", WHITE, BLUE, 16, 0);
+            if (timeOfLight == 0)
+            {
+            	//timeout
+                statusOfLight = PHASE2_YELLOW;
+                timeOfLight = timeOfYellowPhase2;
+            }
+            break;
+        case PHASE2_YELLOW:
+        	//set light
+        	phase2Yellow();
+            //print status
+            lcd_show_string_center(0, 302, "PHASE2 YELLOW", WHITE, BLUE, 16, 0);
+            //print counter phase1
+    		lcd_show_int_num(75, 50, timeOfLight / 10, 1, RED, 0x47e8, 32);
+    		lcd_show_int_num(90, 50, timeOfLight % 10, 1, RED, 0x47e8, 32);
+    		//print counter phase2
+    		lcd_show_int_num(15, 140, (timeOfLight) / 10, 1, RED,
+    				0x47e8, 32);
+    		lcd_show_int_num(30, 140, (timeOfLight) % 10, 1, RED,
+    				0x47e8, 32);
 
-		count1_s = (count1_s + 1) % 20;
-		if (count1_s == 0) {
-			timeTraffic--;
-		}
-
-		if (timeTraffic == 0) {
-			statusOfTrafficLight = AUTO_YELLOW1;
-			timeTraffic = timeYellow;
-		}
-		break;
-
-	case PHASE1_YELLOW:
-		phase1Yellow();
-
-		led_7seg_set_digit(timeTraffic / 10, 0, 0);
-		led_7seg_set_digit(timeTraffic % 10, 1, 0);
-		led_7seg_set_digit(timeTraffic / 10, 2, 0);
-		led_7seg_set_digit(timeTraffic % 10, 3, 0);
-
-		lcd_show_int_num(75, 50, timeTraffic / 10, 1, RED, 0x47e8, 32);
-		lcd_show_int_num(90, 50, timeTraffic % 10, 1, RED, 0x47e8, 32);
-		lcd_show_int_num(15, 140, timeTraffic / 10, 1, RED, 0x47e8, 32);
-		lcd_show_int_num(30, 140, timeTraffic % 10, 1, RED, 0x47e8, 32);
-
-		lcd_show_string_center(0, 302, "YELLOW1", WHITE, BLUE, 16, 0);
-
-		count1_s = (count1_s + 1) % 20;
-		if (count1_s == 0) {
-			timeTraffic--;
-		}
-
-		if (timeTraffic == 0) {
-			statusOfTrafficLight = AUTO_GREEN2;
-			timeTraffic = timeGreen;
-		}
-		break;
-
-	case PHASE2_GREEN:
-		count1_s = (count1_s + 1) % 20;
-		if (count1_s == 0) {
-			timeTraffic--;
-		}
-		phase2Green();
-		led_7seg_set_digit(timeTraffic / 10, 0, 0);
-		led_7seg_set_digit(timeTraffic % 10, 1, 0);
-		led_7seg_set_digit((timeTraffic + timeYellow) / 10, 2, 0);
-		led_7seg_set_digit((timeTraffic + timeYellow) % 10, 3, 0);
-
-		lcd_show_int_num(75, 50, (timeTraffic + timeYellow) / 10, 1, RED,
-				0x47e8, 32);
-		lcd_show_int_num(90, 50, (timeTraffic + timeYellow) % 10, 1, RED,
-				0x47e8, 32);
-		lcd_show_int_num(15, 140, timeTraffic / 10, 1, RED, 0x47e8, 32);
-		lcd_show_int_num(30, 140, timeTraffic % 10, 1, RED, 0x47e8, 32);
-
-		lcd_show_string_center(0, 302, " GREEN2", WHITE, BLUE, 16, 0);
-
-		if (timeTraffic == 0) {
-			statusOfTrafficLight = AUTO_YELLOW2;
-			timeTraffic = timeYellow;
-		}
-		break;
-
-	case PHASE2_YELLOW:
-		count1_s = (count1_s + 1) % 20;
-		if (count1_s == 0) {
-			timeTraffic--;
-		}
-		phase2Yellow();
-		led_7seg_set_digit(timeTraffic / 10, 0, 0);
-		led_7seg_set_digit(timeTraffic % 10, 1, 0);
-		led_7seg_set_digit(timeTraffic / 10, 2, 0);
-		led_7seg_set_digit(timeTraffic % 10, 3, 0);
-
-		lcd_show_int_num(75, 50, timeTraffic / 10, 1, RED, 0x47e8, 32);
-		lcd_show_int_num(90, 50, timeTraffic % 10, 1, RED, 0x47e8, 32);
-		lcd_show_int_num(15, 140, timeTraffic / 10, 1, RED, 0x47e8, 32);
-		lcd_show_int_num(30, 140, timeTraffic % 10, 1, RED, 0x47e8, 32);
-
-		lcd_show_string_center(0, 302, "YELLOW2", WHITE, BLUE, 16, 0);
-
-		if (timeTraffic == 0) {
-			statusOfTrafficLight = AUTO_GREEN1;
-			timeTraffic = timeGreen;
-		}
-		break;
-	}
-
+            if (timeOfLight == 0)
+            {
+            	//timeout
+                statusOfLight = PHASE1_GREEN;
+                timeOfLight = timeOfGreenPhase1;
+            }
+            break;
+        default:
+            statusOfLight = PHASE1_GREEN;
+            break;
+    }
 }
 /* USER CODE END 4 */
 
