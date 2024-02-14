@@ -60,8 +60,8 @@ all: main-build
 main-build: Lab5_FSM_CarIndicator.elf secondary-outputs
 
 # Tool invocations
-Lab5_FSM_CarIndicator.elf Lab5_FSM_CarIndicator.map: $(OBJS) $(USER_OBJS) D:\abc\stm32\VDK_KitTN_Arm4\Lab5_FSM_Exercise\Lab5_FSM_CarIndicator\STM32F407ZETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Lab5_FSM_CarIndicator.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\abc\stm32\VDK_KitTN_Arm4\Lab5_FSM_Exercise\Lab5_FSM_CarIndicator\STM32F407ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab5_FSM_CarIndicator.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Lab5_FSM_CarIndicator.elf Lab5_FSM_CarIndicator.map: $(OBJS) $(USER_OBJS) C:\Users\duytr\Dropbox\project\VDK_KitTN_BKIT_Arm4\Lab5_FSM_Exercise\Lab5_FSM_CarIndicator\STM32F407ZETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Lab5_FSM_CarIndicator.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\duytr\Dropbox\project\VDK_KitTN_BKIT_Arm4\Lab5_FSM_Exercise\Lab5_FSM_CarIndicator\STM32F407ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab5_FSM_CarIndicator.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

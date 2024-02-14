@@ -1,0 +1,7 @@
+../Core/Src/uart.c:13:10:mypow	24	static
+../Core/Src/uart.c:20:6:uart_init_rs232	8	static
+../Core/Src/uart.c:24:6:uart_rs232_send_string	16	static
+../Core/Src/uart.c:29:6:uart_rs232_send_bytes	16	static
+../Core/Src/uart.c:33:6:uart_rs232_send_num	24	static
+../Core/Src/uart.c:55:6:uart_rs232_send_num_percent	16	static
+../Core/Src/uart.c:63:6:HAL_UART_RxCpltCallback	16	static

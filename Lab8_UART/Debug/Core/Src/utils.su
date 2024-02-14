@@ -1,0 +1,2 @@
+../Core/Src/utils.c:9:9:BCD2DEC	16	static
+../Core/Src/utils.c:13:9:DEC2BCD	16	static
