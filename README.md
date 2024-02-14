@@ -4,8 +4,8 @@
 * Giới thiệu về delay.
 
 **Bài 2 - Timer**
-* Bài 2.0: Giới thiệu về Timer.
-* Bài 2.1: Sử dụng 1 Timer chung để định thời cho tất cả các tác vụ khác.
+* Giới thiệu về Timer.
+* Sử dụng 1 Timer chung để định thời cho tất cả các tác vụ khác.
 
 **Bài 3 - LCD, Button**
 * Giới thiệu về thư viện Nút nhấn và Màn hình LCD.
