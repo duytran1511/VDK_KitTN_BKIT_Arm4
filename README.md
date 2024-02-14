@@ -24,6 +24,12 @@
 * Giới thiệu về đồng hồ thời gian thực với IC DS3231.
 * Thực hành bài tập về giao tiếp I2C và Đồng hồ thời gian thực với IC DS3231.
 
+**Bài 7 - ADC và PWM
+* Giới thiệu về ADC và PWM
+
+**Bài 8 - UART
+* Giới thiệu về UART
+
 # Phụ lục
 ## Tài liệu chung
 [Website giới thiệu Kit Thí nghiệm BKIT ARM4](https://abcsolutions.com.vn/index.php/kit-thi-nghiem-bkit-arm4/)
