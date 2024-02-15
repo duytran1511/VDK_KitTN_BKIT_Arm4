@@ -6,3 +6,6 @@ logs
 Debug
 Release
 *.launch
+
+#Workspace folder
+.metadata
