@@ -60,8 +60,8 @@ all: main-build
 main-build: Lab8_UART.elf secondary-outputs
 
 # Tool invocations
-Lab8_UART.elf Lab8_UART.map: $(OBJS) $(USER_OBJS) C:\Users\duytr\Dropbox\project\VDK_KitTN_BKIT_Arm4\Lab8_UART\STM32F407ZETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Lab8_UART.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\duytr\Dropbox\project\VDK_KitTN_BKIT_Arm4\Lab8_UART\STM32F407ZETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab8_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Lab8_UART.elf Lab8_UART.map: $(OBJS) $(USER_OBJS) D:\abc\stm32\VDK_KitTN_Arm4\Lab8_UART\STM32F407ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Lab8_UART.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\abc\stm32\VDK_KitTN_Arm4\Lab8_UART\STM32F407ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab8_UART.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
