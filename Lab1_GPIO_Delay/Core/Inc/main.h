@@ -60,24 +60,19 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define DEBUG_LED_Pin GPIO_PIN_4
 #define DEBUG_LED_GPIO_Port GPIOE
-
 #define OUTPUT_Y0_Pin GPIO_PIN_5
 #define OUTPUT_Y0_GPIO_Port GPIOE
-
 #define OUTPUT_Y1_Pin GPIO_PIN_6
 #define OUTPUT_Y1_GPIO_Port GPIOE
-
 #define INPUT_X0_Pin GPIO_PIN_6
 #define INPUT_X0_GPIO_Port GPIOA
-
 #define INPUT_X1_Pin GPIO_PIN_7
 #define INPUT_X1_GPIO_Port GPIOA
-
 #define INPUT_X2_Pin GPIO_PIN_4
 #define INPUT_X2_GPIO_Port GPIOC
-
 #define INPUT_X3_Pin GPIO_PIN_5
 #define INPUT_X3_GPIO_Port GPIOC
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
@@ -87,5 +82,3 @@ void Error_Handler(void);
 #endif
 
 #endif /* __MAIN_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

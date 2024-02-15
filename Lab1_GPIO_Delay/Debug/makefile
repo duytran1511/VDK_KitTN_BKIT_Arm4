@@ -63,8 +63,8 @@ all: main-build
 main-build: Lab1_GPIO_Delay.elf secondary-outputs
 
 # Tool invocations
-Lab1_GPIO_Delay.elf Lab1_GPIO_Delay.map: $(OBJS) $(USER_OBJS) C:\Users\duytr\Dropbox\project\VDK_KitTN_BKIT_Arm4\Lab1_GPIO_Delay\STM32F407ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Lab1_GPIO_Delay.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\duytr\Dropbox\project\VDK_KitTN_BKIT_Arm4\Lab1_GPIO_Delay\STM32F407ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab1_GPIO_Delay.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Lab1_GPIO_Delay.elf Lab1_GPIO_Delay.map: $(OBJS) $(USER_OBJS) D:\abc\stm32\VDK_KitTN_Arm4\Lab1_GPIO_Delay\STM32F407ZGTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Lab1_GPIO_Delay.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\abc\stm32\VDK_KitTN_Arm4\Lab1_GPIO_Delay\STM32F407ZGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Lab1_GPIO_Delay.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

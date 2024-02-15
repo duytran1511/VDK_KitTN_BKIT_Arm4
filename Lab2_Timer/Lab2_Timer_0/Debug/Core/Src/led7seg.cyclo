@@ -1,6 +1,0 @@
-../Core/Src/led7seg.c:19:6:init_led7seg	1
-../Core/Src/led7seg.c:29:6:display_led7seg	5
-../Core/Src/led7seg.c:65:6:led7seg_set_digit	3
-../Core/Src/led7seg.c:79:6:led7seg_set_colon	2
-../Core/Src/led7seg.c:95:6:led_7seg_debug_turn_on	3
-../Core/Src/led7seg.c:110:6:led_7seg_debug_turn_off	3
