@@ -31,23 +31,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  13 .comment      00000043  00000000  00000000  00020094  2**0
                   CONTENTS, READONLY
- 14 .debug_info   000170d9  00000000  00000000  000200d7  2**0
+ 14 .debug_info   00016f77  00000000  00000000  000200d7  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_abbrev 00003c1f  00000000  00000000  000371b0  2**0
+ 15 .debug_abbrev 00003c23  00000000  00000000  0003704e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_aranges 00001510  00000000  00000000  0003add0  2**3
+ 16 .debug_aranges 00001510  00000000  00000000  0003ac78  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_rnglists 00001064  00000000  00000000  0003c2e0  2**0
+ 17 .debug_rnglists 00001064  00000000  00000000  0003c188  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_macro  0002439c  00000000  00000000  0003d344  2**0
+ 18 .debug_macro  0002439c  00000000  00000000  0003d1ec  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_line   0001cc32  00000000  00000000  000616e0  2**0
+ 19 .debug_line   0001cc35  00000000  00000000  00061588  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_str    000d2bde  00000000  00000000  0007e312  2**0
+ 20 .debug_str    000d2ba2  00000000  00000000  0007e1bd  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_frame  00005bd4  00000000  00000000  00150ef0  2**2
+ 21 .debug_frame  00005bd4  00000000  00000000  00150d60  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 22 .debug_line_str 00000054  00000000  00000000  00156ac4  2**0
+ 22 .debug_line_str 00000054  00000000  00000000  00156934  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -562,8 +562,8 @@ void button_scan() {
 
 0800065c <ds3231_read_time>:
 	HAL_I2C_Mem_Read(&hi2c1, DS3231_ADDRESS, 0x00, I2C_MEMADD_SIZE_8BIT,
-			ds3231_buffer, 7, 10);
-
+			&result, 1, 10);
+	return BCD2DEC(result);
 }
 
 void ds3231_read_time() {
@@ -2315,7 +2315,7 @@ void testUart() {
  8001192:	781b      	ldrb	r3, [r3, #0]
  8001194:	4618      	mov	r0, r3
  8001196:	f000 faf1 	bl	800177c <uart_rs232_send_num>
-		uart_rs232_send_string(":");
+		uart_rs232_send_string((void*)":");
  800119a:	480c      	ldr	r0, [pc, #48]	; (80011cc <testUart+0x48>)
  800119c:	f000 fad4 	bl	8001748 <uart_rs232_send_string>
 		uart_rs232_send_num(ds3231_min);
@@ -2323,7 +2323,7 @@ void testUart() {
  80011a2:	781b      	ldrb	r3, [r3, #0]
  80011a4:	4618      	mov	r0, r3
  80011a6:	f000 fae9 	bl	800177c <uart_rs232_send_num>
-		uart_rs232_send_string(":");
+		uart_rs232_send_string((void*)":");
  80011aa:	4808      	ldr	r0, [pc, #32]	; (80011cc <testUart+0x48>)
  80011ac:	f000 facc 	bl	8001748 <uart_rs232_send_string>
 		uart_rs232_send_num(ds3231_sec);
@@ -2331,7 +2331,7 @@ void testUart() {
  80011b2:	781b      	ldrb	r3, [r3, #0]
  80011b4:	4618      	mov	r0, r3
  80011b6:	f000 fae1 	bl	800177c <uart_rs232_send_num>
-		uart_rs232_send_string("\n");
+		uart_rs232_send_string((void*)"\n");
  80011ba:	4807      	ldr	r0, [pc, #28]	; (80011d8 <testUart+0x54>)
  80011bc:	f000 fac4 	bl	8001748 <uart_rs232_send_string>
 	}

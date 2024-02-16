@@ -44,8 +44,10 @@ void ds3231_write(uint8_t address, uint8_t value) {
 }
 
 uint8_t ds3231_read(uint8_t address) {
+	uint8_t result;
 	HAL_I2C_Mem_Read(&hi2c1, DS3231_ADDRESS, 0x00, I2C_MEMADD_SIZE_8BIT,
-			ds3231_buffer, 7, 10);
+			&result, 1, 10);
+	return BCD2DEC(result);
 }
 
 void ds3231_read_time() {

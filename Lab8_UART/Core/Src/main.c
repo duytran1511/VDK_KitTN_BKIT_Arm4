@@ -178,11 +178,11 @@ void system_init() {
 void testUart() {
 	if (button_count[12] == 1) {
 		uart_rs232_send_num(ds3231_hours);
-		uart_rs232_send_string(":");
+		uart_rs232_send_string((void*)":");
 		uart_rs232_send_num(ds3231_min);
-		uart_rs232_send_string(":");
+		uart_rs232_send_string((void*)":");
 		uart_rs232_send_num(ds3231_sec);
-		uart_rs232_send_string("\n");
+		uart_rs232_send_string((void*)"\n");
 	}
 }
 /* USER CODE END 4 */
