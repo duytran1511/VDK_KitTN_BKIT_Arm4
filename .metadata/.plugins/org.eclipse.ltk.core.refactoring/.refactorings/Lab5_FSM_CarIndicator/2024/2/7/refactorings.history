@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Lab5_FSM_CarIndicator/Bai5_FSM_TrafficLight_Basic.ioc&apos; to &apos;Bai5_FSM_CarIndicator.ioc&apos;" description="Rename resource &apos;Bai5_FSM_TrafficLight_Basic.ioc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Bai5_FSM_TrafficLight_Basic.ioc" name="Bai5_FSM_CarIndicator.ioc" stamp="1707751431878" updateReferences="true"/>
+</session>

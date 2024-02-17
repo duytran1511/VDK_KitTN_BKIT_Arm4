@@ -1,2 +1,0 @@
-../Core/Src/buzzer.c:13:6:buzzer_init	8	static
-../Core/Src/buzzer.c:17:6:buzzer_set_volume	16	static

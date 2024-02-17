@@ -1,9 +1,0 @@
-../Core/Src/main.c:79:5:main	2
-../Core/Src/main.c:137:6:SystemClock_Config	3
-../Core/Src/main.c:177:6:system_init	1
-../Core/Src/main.c:188:9:isButtonUp	2
-../Core/Src/main.c:195:9:isButtonDown	2
-../Core/Src/main.c:202:9:isButtonRight	2
-../Core/Src/main.c:210:6:testADC	2
-../Core/Src/main.c:229:6:testBuzzer	4
-../Core/Src/main.c:248:6:Error_Handler	1

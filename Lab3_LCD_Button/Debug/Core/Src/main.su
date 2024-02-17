@@ -1,6 +1,0 @@
-../Core/Src/main.c:75:5:main	8	static
-../Core/Src/main.c:130:6:SystemClock_Config	88	static
-../Core/Src/main.c:170:6:init_system	8	static
-../Core/Src/main.c:186:6:TestButtonMatrix	32	static
-../Core/Src/main.c:193:6:TestLcd	24	static
-../Core/Src/main.c:207:6:Error_Handler	4	static,ignoring_inline_asm

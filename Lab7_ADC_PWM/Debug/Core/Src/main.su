@@ -1,9 +1,0 @@
-../Core/Src/main.c:79:5:main	8	static
-../Core/Src/main.c:137:6:SystemClock_Config	88	static
-../Core/Src/main.c:177:6:system_init	8	static
-../Core/Src/main.c:188:9:isButtonUp	4	static
-../Core/Src/main.c:195:9:isButtonDown	4	static
-../Core/Src/main.c:202:9:isButtonRight	4	static
-../Core/Src/main.c:210:6:testADC	24	static
-../Core/Src/main.c:229:6:testBuzzer	8	static
-../Core/Src/main.c:248:6:Error_Handler	4	static,ignoring_inline_asm
