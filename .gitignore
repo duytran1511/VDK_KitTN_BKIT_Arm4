@@ -1,11 +1,11 @@
 #Logs
-logs
-*.log
+#logs
+#*.log
 
 #Executed files
-Debug
-Release
-*.launch
+#Debug
+#Release
+#*.launch
 
 #Workspace folder
-.metadata
+#.metadata
