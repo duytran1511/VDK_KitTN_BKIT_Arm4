@@ -1,6 +1,0 @@
-../Core/Src/led_7seg.c:22:6:led_7seg_init	8	static
-../Core/Src/led_7seg.c:32:6:led_7seg_display	8	static
-../Core/Src/led_7seg.c:71:6:led_7seg_set_digit	24	static
-../Core/Src/led_7seg.c:85:6:led_7seg_set_colon	16	static
-../Core/Src/led_7seg.c:101:6:led_7seg_debug_turn_on	16	static
-../Core/Src/led_7seg.c:116:6:led_7seg_debug_turn_off	16	static

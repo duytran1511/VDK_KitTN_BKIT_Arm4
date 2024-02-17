@@ -1,3 +1,0 @@
-../Core/Src/software_timer.c:19:6:timer2_init	8	static
-../Core/Src/software_timer.c:29:6:timer2_set	0	static
-../Core/Src/software_timer.c:41:6:HAL_TIM_PeriodElapsedCallback	0	static

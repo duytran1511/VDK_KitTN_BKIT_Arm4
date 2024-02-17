@@ -1,2 +1,0 @@
-../Core/Src/button.c:21:6:button_init	8	static
-../Core/Src/button.c:31:6:button_scan	24	static

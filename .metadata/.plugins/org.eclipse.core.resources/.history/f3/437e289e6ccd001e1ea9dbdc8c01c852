@@ -1,9 +1,0 @@
-../Core/Src/main.c:77:5:main	3
-../Core/Src/main.c:140:6:SystemClock_Config	3
-../Core/Src/main.c:183:6:init_system	1
-../Core/Src/main.c:192:6:delay_ms	1
-../Core/Src/main.c:196:6:OpenOutput	3
-../Core/Src/main.c:203:6:CloseOutput	3
-../Core/Src/main.c:210:6:TestOutput	2
-../Core/Src/main.c:220:6:ReverseOutput	2
-../Core/Src/main.c:235:6:Error_Handler	1

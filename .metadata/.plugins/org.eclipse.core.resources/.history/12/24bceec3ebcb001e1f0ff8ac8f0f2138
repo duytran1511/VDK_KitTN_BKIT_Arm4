@@ -1,9 +1,0 @@
-../Core/Src/main.c:100:5:main	8	static
-../Core/Src/main.c:151:6:SystemClock_Config	88	static
-../Core/Src/main.c:190:6:system_init	8	static
-../Core/Src/main.c:207:6:phase1Green	16	static
-../Core/Src/main.c:217:6:phase1Yellow	16	static
-../Core/Src/main.c:227:6:phase2Green	16	static
-../Core/Src/main.c:237:6:phase2Yellow	16	static
-../Core/Src/main.c:247:6:appTrafficLight	24	static
-../Core/Src/main.c:361:6:Error_Handler	4	static,ignoring_inline_asm
