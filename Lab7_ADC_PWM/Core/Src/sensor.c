@@ -11,7 +11,7 @@ uint16_t adc_receive[5];
 
 /* Functions */
 void sensor_init() {
-	HAL_ADC_Start_DMA(&hadc1, (uint16_t*) adc_receive, 5);
+	HAL_ADC_Start_DMA(&hadc1, (void*) adc_receive, 5);
 }
 
 void sensor_read() {

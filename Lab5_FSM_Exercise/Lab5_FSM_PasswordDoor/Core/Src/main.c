@@ -75,9 +75,9 @@ void init_system();
 void AppPasswordDoor();
 void UnlockDoor();
 void LockDoor();
-uint8_t isButtonEnter();
-uint16_t isButtonNumber();
-uint16_t checkPassword();
+uint8_t IsButtonEnter();
+uint16_t IsButtonNumber();
+uint16_t CheckPassword();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -200,7 +200,7 @@ void init_system() {
 	HAL_Delay(1000);
 }
 
-uint16_t isButtonNumber() {
+uint16_t IsButtonNumber() {
 	unsigned char i;
 	for (i = 0; i <= 15; i++)
 		if (button_count[i] == 1) {
@@ -211,7 +211,7 @@ uint16_t isButtonNumber() {
 	return 0;
 }
 
-uint16_t checkPassword() {
+uint16_t CheckPassword() {
 	unsigned char i, j;
 	unsigned char result = 1;
 	for (i = 0; i < 5; i++) {
@@ -243,7 +243,7 @@ void LockDoor() {
 	lcd_show_picture(80, 100, 77, 130, image_door_close);
 }
 
-uint8_t isButtonEnter() {
+uint8_t IsButtonEnter() {
 	if (button_count[12] == 1)
 		return 1;
 	else
@@ -264,7 +264,7 @@ void AppPasswordDoor() {
 		lcd_show_string_center(0, 15, "     LOCK       ", RED, WHITE, 16, 0);
 		LockDoor();
 
-		if (isButtonEnter()) {
+		if (IsButtonEnter()) {
 			indexOfNumber = 0;
 			timeDelay = 0;
 			statusPassword = ENTER_PASSWORD;
@@ -280,7 +280,7 @@ void AppPasswordDoor() {
 	case ENTER_PASSWORD:
 		lcd_show_string_center(0, 12, "   ENTER PASS   ", RED, WHITE, 16, 0);
 		timeDelay++;
-		if (isButtonNumber()) {
+		if (IsButtonNumber()) {
 			lcd_show_string(70 + indexOfNumber * 30, 242, "*", BLACK, LIGHTGRAY,
 					16, 0);
 			arrayPassword[indexOfNumber] = numberValue;
@@ -301,7 +301,7 @@ void AppPasswordDoor() {
 	case CHECK_PASSWORD:
 
 		timeDelay = 0;
-		if (checkPassword()) {
+		if (CheckPassword()) {
 			lcd_fill(30, 40, 210, 80, WHITE);		//clear text
 			lcd_fill(30, 265, 210, 300, WHITE);		//clear protect
 			statusPassword = UNLOCK_DOOR;

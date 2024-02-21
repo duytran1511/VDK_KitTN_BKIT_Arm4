@@ -64,11 +64,11 @@ int statusOfIndicator = INIT;
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void system_init();
-void appIndicator();
-void leftIndicatorOn();
-void leftIndicatorOff();
-void rightIndicatorOn();
-void rightIndicatorOff();
+void AppIndicator();
+void LeftIndicatorOn();
+void LeftIndicatorOff();
+void RightIndicatorOn();
+void RightIndicatorOff();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -118,7 +118,7 @@ int main(void) {
 		while (!timer2_flag);
 		timer2_flag = 0;
 		button_scan();
-		appIndicator();
+		AppIndicator();
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
@@ -186,20 +186,20 @@ void system_init() {
 	HAL_Delay(1000);
 }
 
-void leftIndicatorOn(){
+void LeftIndicatorOn(){
 	lcd_draw_circle(54, 195, YELLOW, 14, 1);
 }
-void leftIndicatorOff(){
+void LeftIndicatorOff(){
 	lcd_draw_circle(54, 195, GRAY, 14, 1);
 }
-void rightIndicatorOn(){
+void RightIndicatorOn(){
 	lcd_draw_circle(194, 196, YELLOW, 14, 1);
 }
-void rightIndicatorOff(){
+void RightIndicatorOff(){
 	lcd_draw_circle(194, 196, GRAY, 14, 1);
 }
 
-void appIndicator()
+void AppIndicator()
 {
     cntOfIndicator = (cntOfIndicator + 1)%20;
     if (cntOfIndicator == 0){
@@ -226,8 +226,8 @@ void appIndicator()
 		case OFF:
 			lcd_show_string_center(0, 302, " OFF ", WHITE, BLUE, 16, 0);
 
-			leftIndicatorOff();
-			rightIndicatorOff();
+			LeftIndicatorOff();
+			RightIndicatorOff();
 
 			if(button_count[11] == 1){
 				statusOfIndicator = RIGHT;
@@ -240,12 +240,12 @@ void appIndicator()
 		case RIGHT:
 			lcd_show_string_center(0, 302, "RIGHT", WHITE, BLUE, 16, 0);
 
-			leftIndicatorOff();
+			LeftIndicatorOff();
 
 			if(flag_blink == 1){
-				rightIndicatorOn();
+				RightIndicatorOn();
 			} else {
-				rightIndicatorOff();
+				RightIndicatorOff();
 			}
 
 			if(button_count[15] == 1){
@@ -256,13 +256,13 @@ void appIndicator()
 			lcd_show_string_center(0, 302, "LEFT ", WHITE, BLUE, 16, 0);
 
 			if(flag_blink == 1){
-				leftIndicatorOn();
+				LeftIndicatorOn();
 			} else {
-				leftIndicatorOff();
+				LeftIndicatorOff();
 			}
 
 
-			rightIndicatorOff();
+			RightIndicatorOff();
 
 			if(button_count[11] == 1){
 				statusOfIndicator = OFF;

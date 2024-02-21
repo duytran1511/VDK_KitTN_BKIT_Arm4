@@ -67,11 +67,11 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void init_system();
 
-uint8_t isButtonUp();
-uint8_t isButtonDown();
-uint8_t isButtonStop();
-uint8_t isBottomSwitch();
-uint8_t isTopSwitch();
+uint8_t IsButtonUp();
+uint8_t IsButtonDown();
+uint8_t IsButtonStop();
+uint8_t IsBottomSwitch();
+uint8_t IsTopSwitch();
 void FlagMovingDown();
 void FlagMovingUp();
 void FlagStopMoving();
@@ -197,35 +197,35 @@ void init_system() {
 	HAL_Delay(1000);
 }
 
-uint8_t isButtonUp() {
+uint8_t IsButtonUp() {
 	if (button_count[3] == 1)
 		return 1;
 	else
 		return 0;
 }
 
-uint8_t isButtonDown() {
+uint8_t IsButtonDown() {
 	if (button_count[7] == 1)
 		return 1;
 	else
 		return 0;
 }
 
-uint8_t isButtonStop() {
+uint8_t IsButtonStop() {
 	if (button_count[11] == 1)
 		return 1;
 	else
 		return 0;
 }
 
-uint8_t isBottomSwitch() {
+uint8_t IsBottomSwitch() {
 	if (flag_position == BOTTOM_POSITION_OF_FLAG)
 		return 1;
 	else
 		return 0;
 }
 
-uint8_t isTopSwitch() {
+uint8_t IsTopSwitch() {
 	if (flag_position == TOP_POSITION_OF_FLAG)
 		return 1;
 	else
@@ -262,15 +262,15 @@ void BaiTapFlag() {
 		lcd_show_string_center(0, 2, "   MOVING UP   ", WHITE, BLUE, 16, 0);
 		FlagMovingUp();
 
-		if (isButtonDown()) {
+		if (IsButtonDown()) {
 			statusFlag = MOVING_DOWN;
 		}
 
-		if (isTopSwitch()) {
+		if (IsTopSwitch()) {
 			statusFlag = TOP_POSITION;
 		}
 
-		if (isButtonStop()) {
+		if (IsButtonStop()) {
 			statusFlag = STOP_MOVING;
 		}
 		break;
@@ -279,7 +279,7 @@ void BaiTapFlag() {
 		lcd_show_string_center(0, 2, "BOTTOM POSITION", WHITE, BLUE, 16, 0);
 		FlagStopMoving();
 
-		if (isButtonUp()) {
+		if (IsButtonUp()) {
 			statusFlag = MOVING_UP;
 		}
 		break;
@@ -288,11 +288,11 @@ void BaiTapFlag() {
 		lcd_show_string_center(0, 2, "  MOVING DOWN  ", WHITE, BLUE, 16, 0);
 		FlagMovingDown();
 
-		if (isBottomSwitch()) {
+		if (IsBottomSwitch()) {
 			statusFlag = BOTTOM_POSITION;
 		}
 
-		if (isButtonStop()) {
+		if (IsButtonStop()) {
 			statusFlag = STOP_MOVING;
 		}
 		break;
@@ -302,7 +302,7 @@ void BaiTapFlag() {
 		BLUE, 16, 0);
 		FlagStopMoving();
 
-		if (isButtonDown()) {
+		if (IsButtonDown()) {
 			statusFlag = MOVING_DOWN;
 		}
 		break;
@@ -311,11 +311,11 @@ void BaiTapFlag() {
 		lcd_show_string_center(0, 2, "  STOP MOVING  ", WHITE, BLUE, 16, 0);
 		FlagStopMoving();
 
-		if (isButtonUp()) {
+		if (IsButtonUp()) {
 			statusFlag = MOVING_UP;
 		}
 
-		if (isButtonDown()) {
+		if (IsButtonDown()) {
 			statusFlag = MOVING_DOWN;
 		}
 		break;

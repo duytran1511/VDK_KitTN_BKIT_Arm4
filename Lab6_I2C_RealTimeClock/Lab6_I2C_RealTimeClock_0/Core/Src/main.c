@@ -55,8 +55,8 @@
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void system_init();
-void displayTime();
-void updateTime();
+void DisplayTime();
+void UpdateTime();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -103,7 +103,7 @@ int main(void) {
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	lcd_clear(BLACK);
-	updateTime();
+	UpdateTime();
 
 	while (1) {
 		while (!timer2_flag)
@@ -112,7 +112,7 @@ int main(void) {
 
 		ds3231_read_time();
 
-		displayTime();
+		DisplayTime();
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
@@ -176,7 +176,7 @@ void system_init() {
 	timer2_set(50);
 }
 
-void updateTime() {
+void UpdateTime() {
 	ds3231_write(ADDRESS_YEAR, 23);
 	ds3231_write(ADDRESS_MONTH, 10);
 	ds3231_write(ADDRESS_DATE, 20);
@@ -186,7 +186,7 @@ void updateTime() {
 	ds3231_write(ADDRESS_SEC, 23);
 }
 
-void displayTime() {
+void DisplayTime() {
 	lcd_show_int_num(70, 100, ds3231_hours, 2, GREEN, BLACK, 24);
 	lcd_show_int_num(110, 100, ds3231_min, 2, GREEN, BLACK, 24);
 	lcd_show_int_num(150, 100, ds3231_sec, 2, GREEN, BLACK, 24);

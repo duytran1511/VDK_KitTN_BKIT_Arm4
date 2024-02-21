@@ -51,7 +51,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+int numberOfPushButton;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -59,6 +59,8 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void init_system();
 
+int IsButtonUp();
+int IsButtonDown();
 void TestButtonMatrix();
 void TestLcd();
 /* USER CODE END PFP */
@@ -183,12 +185,29 @@ void init_system() {
 	timer4_set(1);
 }
 
+int IsButtonUp(){
+	if(button_count[3] == 1 || (button_count[3] > 20 && button_count[3] % 2 == 0 )){
+		return 1;
+	}
+	return 0;
+}
+
+int IsButtonDown(){
+	if(button_count[7] == 1){
+		return 1;
+	}
+	return 0;
+}
+
 void TestButtonMatrix() {
 	for (int i = 0; i < 16; i++) {
 		if (button_count[i] != 0) {
 			lcd_show_int_num(140, 105, i, 2, BRED, WHITE, 32);
 		}
 	}
+    if (IsButtonUp()) numberOfPushButton++;
+    if (IsButtonDown()) numberOfPushButton--;
+    lcd_show_int_num(40, 105, numberOfPushButton, 2, GREEN, WHITE, 32);
 }
 void TestLcd() {
 	lcd_fill(0, 0, 240, 20, BLUE);

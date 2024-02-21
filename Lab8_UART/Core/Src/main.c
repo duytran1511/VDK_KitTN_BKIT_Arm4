@@ -61,7 +61,7 @@
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void system_init();
-void testUart();
+void TestUart();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -115,7 +115,7 @@ int main(void) {
 		timer2_flag = 0;
 		button_scan();
 		ds3231_read_time();
-		testUart();
+		TestUart();
 		/* USER CODE BEGIN 3 */
 	}
 	/* USER CODE END 3 */
@@ -175,7 +175,7 @@ void system_init() {
 	timer2_set(50);
 }
 
-void testUart() {
+void TestUart() {
 	if (button_count[12] == 1) {
 		uart_rs232_send_num(ds3231_hours);
 		uart_rs232_send_string((void*)":");

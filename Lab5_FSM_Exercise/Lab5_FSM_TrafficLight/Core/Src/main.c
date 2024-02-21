@@ -85,7 +85,7 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void system_init();
 
-void appTrafficLight();
+void AppTrafficLight();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -136,7 +136,7 @@ int main(void) {
 		timer2_flag = 0;
 
 		button_scan();
-		appTrafficLight();
+		AppTrafficLight();
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
@@ -244,7 +244,7 @@ void phase2Yellow() {
 	lcd_draw_circle(CX_YELLOW1, CY_YELLOW1, 0x6351, RADIUS, 1);
 }
 
-void appTrafficLight()
+void AppTrafficLight()
 {
     cntOfLight = (cntOfLight + 1)%20;
     if (cntOfLight == 0){

@@ -30,6 +30,7 @@
 #include "software_timer.h"
 #include "lcd.h"
 #include "ds3231.h"
+#include "button.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -39,6 +40,13 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define INIT_SYSTEM     0
+#define SET_HOUR        1
+#define SET_MINUTE      2
+#define SET_DAY         3
+#define SET_DATE        4
+#define SET_MONTH       5
+#define SET_YEAR        6
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -49,14 +57,26 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+int statusSetupTime = INIT_SYSTEM;
+int timeBlink = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void system_init();
-void displayTime();
-void updateTime();
+void DisplayTime();
+void UpdateTime();
+unsigned char IsButtonMode();
+unsigned char IsButtonUp();
+unsigned char IsButtonDown();
+void SetHour();
+void SetMinute();
+void SetDay();
+void SetDate();
+void SetMonth();
+void SetYear();
+void SetUpTime();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -103,7 +123,7 @@ int main(void) {
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	lcd_clear(BLACK);
-	updateTime();
+	UpdateTime();
 
 	while (1) {
 		while (!timer2_flag)
@@ -112,8 +132,9 @@ int main(void) {
 
 		ds3231_read_time();
 
-		displayTime();
-		/* USER CODE END WHILE */
+		DisplayTime();
+		SetUpTime();
+    /* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
 	}
@@ -176,7 +197,7 @@ void system_init() {
 	timer2_set(50);
 }
 
-void updateTime() {
+void UpdateTime() {
 	ds3231_write(ADDRESS_YEAR, 23);
 	ds3231_write(ADDRESS_MONTH, 10);
 	ds3231_write(ADDRESS_DATE, 20);
@@ -186,14 +207,200 @@ void updateTime() {
 	ds3231_write(ADDRESS_SEC, 23);
 }
 
-void displayTime() {
-	lcd_show_int_num(70, 100, ds3231_hours, 2, GREEN, BLACK, 24);
-	lcd_show_int_num(110, 100, ds3231_min, 2, GREEN, BLACK, 24);
-	lcd_show_int_num(150, 100, ds3231_sec, 2, GREEN, BLACK, 24);
-	lcd_show_int_num(20, 130, ds3231_day, 2, YELLOW, BLACK, 24);
-	lcd_show_int_num(70, 130, ds3231_date, 2, YELLOW, BLACK, 24);
-	lcd_show_int_num(110, 130, ds3231_month, 2, YELLOW, BLACK, 24);
-	lcd_show_int_num(150, 130, ds3231_year, 2, YELLOW, BLACK, 24);
+void DisplayTime()
+{
+	if(statusSetupTime == INIT_SYSTEM) ds3231_read_time();
+	if(statusSetupTime != SET_HOUR || (statusSetupTime == SET_HOUR && timeBlink >= 5)){
+		lcd_show_int_num(70, 100, ds3231_hours/10, 1, GREEN, BLACK, 24);
+		lcd_show_int_num(83, 100, ds3231_hours%10, 1, GREEN, BLACK, 24);
+	}
+
+	lcd_show_char(96, 100, ':', GREEN, BLACK, 24, 0);
+	lcd_show_int_num(110, 100, ds3231_min/10, 1, GREEN, BLACK, 24);
+	lcd_show_int_num(123, 100, ds3231_min%10, 1, GREEN, BLACK, 24);
+	lcd_show_char(136, 100, ':', GREEN, BLACK, 24, 0);
+	lcd_show_int_num(150, 100, ds3231_sec/10, 1, GREEN, BLACK, 24);
+	lcd_show_int_num(163, 100, ds3231_sec%10, 1, GREEN, BLACK, 24);
+
+    //////day
+    switch(ds3231_day)
+    {
+        case 1:
+        	lcd_show_string(20, 130, "SUN", YELLOW, BLACK, 24, 0);
+            break;
+        case 2:
+        	lcd_show_string(20, 130, "MON", YELLOW, BLACK, 24, 0);
+            break;
+        case 3:
+        	lcd_show_string(20, 130, "TUE", YELLOW, BLACK, 24, 0);
+            break;
+        case 4:
+        	lcd_show_string(20, 130, "WED", YELLOW, BLACK, 24, 0);
+            break;
+        case 5:
+        	lcd_show_string(20, 130, "THU", YELLOW, BLACK, 24, 0);
+            break;
+        case 6:
+        	lcd_show_string(20, 130, "FRI", YELLOW, BLACK, 24, 0);
+            break;
+        case 7:
+        	lcd_show_string(20, 130, "SAT", YELLOW, BLACK, 24, 0);
+            break;
+    }
+
+
+    switch(ds3231_month)
+    {
+        case 1:
+        	lcd_show_string(105, 130, "JAN", YELLOW, BLACK, 24, 0);
+            break;
+        case 2:
+        	lcd_show_string(105, 130, "FEB", YELLOW, BLACK, 24, 0);
+            break;
+        case 3:
+        	lcd_show_string(105, 130, "MAR", YELLOW, BLACK, 24, 0);
+            break;
+        case 4:
+        	lcd_show_string(105, 130, "APR", YELLOW, BLACK, 24, 0);
+            break;
+        case 5:
+        	lcd_show_string(105, 130, "MAY", YELLOW, BLACK, 24, 0);
+            break;
+        case 6:
+        	lcd_show_string(105, 130, "JUN", YELLOW, BLACK, 24, 0);
+            break;
+        case 7:
+        	lcd_show_string(105, 130, "JUL", YELLOW, BLACK, 24, 0);
+            break;
+        case 8:
+        	lcd_show_string(105, 130, "AUG", YELLOW, BLACK, 24, 0);
+            break;
+        case 9:
+        	lcd_show_string(105, 130, "SEP", YELLOW, BLACK, 24, 0);
+            break;
+        case 10:
+        	lcd_show_string(105, 130, "OCT", YELLOW, BLACK, 24, 0);
+            break;
+        case 11:
+        	lcd_show_string(105, 130, "NOV", YELLOW, BLACK, 24, 0);
+            break;
+        case 12:
+        	lcd_show_string(105, 130, "DEC", YELLOW, BLACK, 24, 0);
+            break;
+    }
+
+    lcd_show_int_num(70, 130, ds3231_date, 2, YELLOW, BLACK, 24);
+
+	lcd_show_int_num(150, 130, 20, 2, YELLOW, BLACK, 24);
+	lcd_show_int_num(176, 130, ds3231_year, 2, YELLOW, BLACK, 24);
+
+}
+
+void SetUpTime()
+{
+    switch(statusSetupTime)
+    {
+        case INIT_SYSTEM:
+            if(IsButtonMode())
+                statusSetupTime = SET_HOUR;
+            break;
+        case SET_HOUR:
+            SetHour();
+            if(IsButtonMode())
+                statusSetupTime = SET_MINUTE;
+            break;
+        case SET_MINUTE:
+            SetMinute();
+            if(IsButtonMode())
+                statusSetupTime = SET_DAY;
+            break;
+        case SET_DAY:
+            SetDay();
+            if(IsButtonMode())
+                statusSetupTime = SET_DATE;
+            break;
+        case SET_DATE:
+            SetDate();
+            if(IsButtonMode())
+                statusSetupTime = SET_MONTH;
+            break;
+        case SET_MONTH:
+            SetMonth();
+            if(IsButtonMode())
+                statusSetupTime = SET_YEAR;
+            break;
+        case SET_YEAR:
+            SetYear();
+            if(IsButtonMode())
+                statusSetupTime = INIT_SYSTEM;
+            break;
+        default:
+            statusSetupTime = INIT_SYSTEM;
+            break;
+
+
+    }
+}
+//
+unsigned char IsButtonMode()
+{
+    if (button_count[4] == 1)
+        return 1;
+    else
+        return 0;
+}
+
+unsigned char IsButtonUp()
+{
+    if ((button_count[5] == 1) || (button_count[5] >= 10 && button_count[5]%4 == 0))
+        return 1;
+    else
+        return 0;
+}
+
+unsigned char IsButtonDown()
+{
+    if ((button_count[9] == 1) || (button_count[9] >= 10 && button_count[9]%4 == 0))
+        return 1;
+    else
+        return 0;
+}
+
+void SetHour()
+{
+    timeBlink = (timeBlink + 1)%20;
+    if(timeBlink < 5)
+    	lcd_show_string(70, 100, "  ", GREEN, BLACK, 24, 0);
+    if(IsButtonUp())
+    {
+        ds3231_hours++;
+        if(ds3231_hours > 23)
+            ds3231_hours = 0;
+        ds3231_write(ADDRESS_HOUR, ds3231_hours);
+    }
+    if(IsButtonDown())
+    {
+        ds3231_hours--;
+        if(ds3231_hours < 0)
+            ds3231_hours = 23;
+        ds3231_write(ADDRESS_HOUR, ds3231_hours);
+    }
+}
+void SetMinute()
+{
+
+}
+void SetDay()
+{
+}
+void SetDate()
+{
+}
+void SetMonth()
+{
+}
+void SetYear()
+{
 }
 /* USER CODE END 4 */
 

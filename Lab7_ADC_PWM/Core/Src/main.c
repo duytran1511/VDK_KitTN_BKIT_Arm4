@@ -63,8 +63,8 @@
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void system_init();
-void testBuzzer();
-void testADC();
+void TestBuzzer();
+void TestADC();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -121,8 +121,8 @@ int main(void) {
 
 		button_scan();
 
-		testADC();
-		testBuzzer();
+		TestADC();
+		TestBuzzer();
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
@@ -185,14 +185,14 @@ void system_init() {
 	timer2_set(50);
 }
 
-uint8_t isButtonUp() {
+uint8_t IsButtonUp() {
 	if (button_count[3] == 1)
 		return 1;
 	else
 		return 0;
 }
 
-uint8_t isButtonDown() {
+uint8_t IsButtonDown() {
 	if (button_count[7] == 1)
 		return 1;
 	else
@@ -207,7 +207,7 @@ uint8_t isButtonRight() {
 }
 
 uint8_t count_adc = 0;
-void testADC() {
+void TestADC() {
 	count_adc = (count_adc + 1) % 20;
 	if (count_adc == 0) {
 		sensor_read();
@@ -226,12 +226,12 @@ void testADC() {
 	}
 }
 
-void testBuzzer() {
-	if (isButtonUp()) {
+void TestBuzzer() {
+	if (IsButtonUp()) {
 		buzzer_set_volume(50);
 	}
 
-	if (isButtonDown()) {
+	if (IsButtonDown()) {
 		buzzer_set_volume(0);
 	}
 
