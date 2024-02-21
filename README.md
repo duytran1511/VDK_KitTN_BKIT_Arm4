@@ -19,10 +19,10 @@
 * Thực hành bài tập Đèn giao thông.
 * Thực hành bài tập Password Door.
 
-**Bài 6 - Chuẩn giao tiếp I2C và Đồng hồ thời gian thực với IC DS3231**
+**Bài 6 - Đồng hồ thời gian thực**
 * Giới thiệu chuẩn giao tiếp I2C.
 * Giới thiệu về đồng hồ thời gian thực với IC DS3231.
-* Thực hành bài tập về giao tiếp I2C và Đồng hồ thời gian thực với IC DS3231.
+* Thực hành bài tập Đồng hồ thời gian thực.
 
 **Bài 7 - ADC và PWM**
 * Giới thiệu về ADC và PWM
@@ -30,16 +30,9 @@
 **Bài 8 - UART**
 * Giới thiệu về UART
 
-# Phụ lục
-## Tài liệu chung
-[Website giới thiệu Kit Thí nghiệm BKIT ARM4 (nên đọc trước)](https://abcsolutions.com.vn/index.php/kit-thi-nghiem-bkit-arm4/)
+## Tài liệu
+[Website giới thiệu Kit Thí nghiệm BKIT ARM4](https://abcsolutions.com.vn/index.php/kit-thi-nghiem-bkit-arm4/)
 
-[Hướng dẫn sử dụng nhanh Kit Thí nghiệm BKIT ARM4 (nên đọc trước)](https://abcsolutions.com.vn/wp-content/uploads/2023/11/KitThiNghiem_STM32_ARM4_QuickStartGuide_20231027_1027.pdf)
+[Hướng dẫn sử dụng nhanh Kit Thí nghiệm BKIT ARM4](https://abcsolutions.com.vn/wp-content/uploads/2023/11/KitThiNghiem_STM32_ARM4_QuickStartGuide_20231027_1027.pdf)
 
-
-## Ứng dụng lập trình và nạp code
-[STM32Cube IDE](https://www.st.com/en/development-tools/stm32cubeide.html)
-
-[STM32Cube Programmer](https://www.st.com/en/development-tools/stm32cubeprog.html)
-
-[STM32Cube IDE và Programmer đã tải sẵn](https://drive.google.com/drive/folders/1yH3eZkApmjC20_wG_3Dd8LRj58xgJZOC?usp=sharing)
+[Tài liệu chia sẻ sinh viên](https://drive.google.com/drive/folders/1-nrxDofZvNRVR-uWFto3qvDx2LCEXZcE?usp=sharing)
