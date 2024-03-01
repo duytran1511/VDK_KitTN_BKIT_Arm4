@@ -27,7 +27,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
-#include "led.h"
 #include "led_7seg.h"
 #include "button.h"
 #include "lcd.h"
@@ -117,7 +116,6 @@ int main(void) {
 
 		button_scan();
 		TestButtonMatrix();
-
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
@@ -185,15 +183,17 @@ void init_system() {
 	timer4_set(1);
 }
 
-int IsButtonUp(){
-	if(button_count[3] == 1 || (button_count[3] > 20 && button_count[3] % 2 == 0 )){
+// Button example 1: a button is pressed 1 time.
+int IsButtonDown(){
+	if(button_count[7] == 1){
 		return 1;
 	}
 	return 0;
 }
 
-int IsButtonDown(){
-	if(button_count[7] == 1){
+// Button example 2: button pressing and button scrolling
+int IsButtonUp(){
+	if(button_count[3] == 1 || (button_count[3] > 20 && button_count[3] % 2 == 0 )){
 		return 1;
 	}
 	return 0;
@@ -207,6 +207,7 @@ void TestButtonMatrix() {
 	}
     if (IsButtonUp()) numberOfPushButton++;
     if (IsButtonDown()) numberOfPushButton--;
+
     lcd_show_int_num(40, 105, numberOfPushButton, 2, GREEN, WHITE, 32);
 }
 void TestLcd() {
