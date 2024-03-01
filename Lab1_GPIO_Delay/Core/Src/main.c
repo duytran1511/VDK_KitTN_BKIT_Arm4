@@ -32,8 +32,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define	ON	155
-#define	OFF	70
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -44,21 +42,11 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-unsigned char arrayMapOfOutput[2] = { OUTPUT_Y0_Pin, OUTPUT_Y1_Pin };
-unsigned char statusOutput[2] = { OFF, OFF };
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-void SystemClock_Config(void);
-void init_system(void);
-void delay_ms(int value);
-
-void OpenOutput(int index);
-void CloseOutput(int index);
-void TestOutput(void);
-void ReverseOutput(int index);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -70,10 +58,8 @@ void ReverseOutput(int index);
  * @brief  The application entry point.
  * @retval int
  */
-int main(void)
-{
+int main(void) {
 	/* USER CODE BEGIN 1 */
-
 	/* USER CODE END 1 */
 
 	/* MCU Configuration--------------------------------------------------------*/
@@ -82,40 +68,38 @@ int main(void)
 	HAL_Init();
 
 	/* USER CODE BEGIN Init */
-
 	/* USER CODE END Init */
 
 	/* Configure the system clock */
 	SystemClock_Config();
-
 	/* USER CODE BEGIN SysInit */
-	SystemClock_Config();
 	/* USER CODE END SysInit */
 
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	/* USER CODE BEGIN 2 */
-	init_system();
-
-	OpenOutput(0);
-	delay_ms(2000);
-	CloseOutput(0);
-
-	OpenOutput(1);
-	delay_ms(5000);
-	CloseOutput(1);
-
-	OpenOutput(0);
-	CloseOutput(1);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 	while (1) {
-		ReverseOutput(0);
-		ReverseOutput(1);
-		delay_ms(500);
 		/* USER CODE END WHILE */
+		// Method 1
+		HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 1);
+		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 1);
+		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 1);
+		HAL_Delay(1000);
+
+		HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 0);
+		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 0);
+		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 0);
+		HAL_Delay(1000);
+
+		// Method 2
+		HAL_GPIO_TogglePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin);
+		HAL_GPIO_TogglePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin);
+		HAL_GPIO_TogglePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin);
+		HAL_Delay(1000);
 
 		/* USER CODE BEGIN 3 */
 	}
@@ -126,10 +110,9 @@ int main(void)
  * @brief System Clock Configuration
  * @retval None
  */
-void SystemClock_Config(void)
-{
-	RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-	RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+void SystemClock_Config(void) {
+	RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
+	RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
 
 	/** Configure the main internal regulator output voltage
 	 */
@@ -148,78 +131,32 @@ void SystemClock_Config(void)
 	RCC_OscInitStruct.PLL.PLLN = 168;
 	RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
 	RCC_OscInitStruct.PLL.PLLQ = 4;
-	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-	{
+	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) {
 		Error_Handler();
 	}
 
 	/** Initializes the CPU, AHB and APB buses clocks
 	 */
-	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-			|RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
+			| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
 	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
 	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
 	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
 	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK)
-	{
+	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_5) != HAL_OK) {
 		Error_Handler();
 	}
 }
 
 /* USER CODE BEGIN 4 */
-
-void init_system(void) {
-	delay_ms(1000);
-}
-
-void delay_ms(int value) {
-	HAL_Delay(1000);
-}
-
-void OpenOutput(int index) {
-	if (index >= 0 && index <= 1) {
-		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, arrayMapOfOutput[index], 1);
-		statusOutput[index] = ON;
-	}
-}
-
-void CloseOutput(int index) {
-	if (index >= 0 && index <= 1) {
-		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, arrayMapOfOutput[index], 0);
-		statusOutput[index] = OFF;
-	}
-}
-
-void TestOutput(void) {
-	int i;
-	for (i = 0; i <= 1; i++) {
-		OpenOutput(i);
-		delay_ms(500);
-		CloseOutput(i);
-		delay_ms(500);
-	}
-}
-
-void ReverseOutput(int index) {
-	if (statusOutput[index] == ON) {
-		CloseOutput(index);
-		statusOutput[index] = OFF;
-	} else {
-		OpenOutput(index);
-		statusOutput[index] = ON;
-	}
-}
-
 /* USER CODE END 4 */
 
 /**
  * @brief  This function is executed in case of error occurrence.
  * @retval None
  */
-void Error_Handler(void)
-{
+void Error_Handler(void) {
 	/* USER CODE BEGIN Error_Handler_Debug */
 	/* User can add his own implementation to report the HAL error return state */
 	__disable_irq();
