@@ -1,5 +1,4 @@
 "./Core/Src/gpio.o"
-"./Core/Src/led.o"
 "./Core/Src/led_7seg.o"
 "./Core/Src/main.o"
 "./Core/Src/software_timer.o"

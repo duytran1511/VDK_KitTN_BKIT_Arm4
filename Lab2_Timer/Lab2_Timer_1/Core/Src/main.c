@@ -19,7 +19,6 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
 #include "spi.h"
 #include "tim.h"
 #include "gpio.h"
@@ -27,7 +26,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "led_7seg.h"
-#include "led.h"
 #include "software_timer.h"
 /* USER CODE END Includes */
 
@@ -38,8 +36,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define	ON	155
-#define	OFF	70
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -50,25 +46,19 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-unsigned char arrayMapOfOutput[2] = { OUTPUT_Y0_Pin, OUTPUT_Y1_Pin };
-unsigned char statusOutput[2] = { OFF, OFF };
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void init_system(void);
-void delay_ms(int value);
 
-void OpenOutput(int index);
-void CloseOutput(int index);
-void TestOutput(void);
-void ReverseOutput(int index);
-
-unsigned char statusLed_0 = 0;
-void Led_0();
-unsigned char statusLed_1 = 0;
-void Led_1();
+unsigned char statusLed_Debug = 0;
+void Led_Debug();
+unsigned char statusLed_Y0 = 0;
+void Led_Y0();
+unsigned char statusLed_Y1 = 0;
+void Led_Y1();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -105,14 +95,6 @@ int main(void) {
 	MX_TIM4_Init();
 	/* USER CODE BEGIN 2 */
 	init_system();
-
-	OpenOutput(0);
-	delay_ms(2000);
-	CloseOutput(0);
-
-	OpenOutput(1);
-	delay_ms(2000);
-	CloseOutput(1);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -120,14 +102,11 @@ int main(void) {
 	while (1) {
 		if (timer2_flag == 1) {
 			timer2_flag = 0;
-			ReverseOutput(1);
-		}
 
-		if (timer3_flag == 1) {
-			timer3_flag = 0;
-			ReverseOutput(0);
+			Led_Y0();
+			Led_Y1();
+			Led_Debug();
 		}
-
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
@@ -181,65 +160,29 @@ void SystemClock_Config(void) {
 /* USER CODE BEGIN 4 */
 void init_system(void) {
 	timer2_init();
-	timer3_init();
-	timer2_set(1000);
-	timer3_set(5000);
-
-	delay_ms(1000);
+	timer2_set(50);
 }
 
-void delay_ms(int value) {
-	HAL_Delay(1000);
+void Led_Debug() {
+	statusLed_Y0 = (statusLed_Y0 + 1) % 20;							// Period = 50 (ms) * 20 = 1000 (ms)
+	if (statusLed_Y1 == 0)											// Turn on in (10 / 20) * 1000 = 500 (ms)
+		HAL_GPIO_TogglePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin);
 }
 
-void OpenOutput(int index) {
-	if (index >= 0 && index <= 1) {
-		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, arrayMapOfOutput[index], 1);
-		statusOutput[index] = ON;
-	}
-}
-
-void CloseOutput(int index) {
-	if (index >= 0 && index <= 1) {
-		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, arrayMapOfOutput[index], 0);
-		statusOutput[index] = OFF;
-	}
-}
-
-void TestOutput(void) {
-	int i;
-	for (i = 0; i <= 1; i++) {
-		OpenOutput(i);
-		delay_ms(500);
-		CloseOutput(i);
-		delay_ms(500);
-	}
-}
-
-void ReverseOutput(int index) {
-	if (statusOutput[index] == ON) {
-		CloseOutput(index);
-		statusOutput[index] = OFF;
-	} else {
-		OpenOutput(index);
-		statusOutput[index] = ON;
-	}
-}
-
-void Led_0() {
-	statusLed_0 = (statusLed_0 + 1) % 20;	// 50 (ms) * 20 = 1000 (ms)
-	if (statusLed_1 < 4)
-		OpenOutput(0);
+void Led_Y0() {
+	statusLed_Y0 = (statusLed_Y0 + 1) % 20;							// Period = 50 (ms) * 20 = 1000 (ms)
+	if (statusLed_Y1 < 10)
+		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 1);	// Turn on in (10 / 20) * 1000 = 500 (ms)
 	else
-		CloseOutput(0);
+		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 0);	// Turn off in 1000 - 500 = 500 (ms)
 }
 
-void Led_1() {
-	statusLed_1 = (statusLed_1 + 1) % 40;	// 50 (ms) * 40 = 2000 (ms)
-	if (statusLed_1 < 10)
-		OpenOutput(1);
+void Led_Y1() {
+	statusLed_Y1 = (statusLed_Y1 + 1) % 40;							// Period = 50 (ms) * 40 = 2000 (ms)
+	if (statusLed_Y1 < 10)
+		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 1);	// Turn on in (10 / 40) * 1000 = 500 (ms)
 	else
-		CloseOutput(1);
+		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 0);	// Turn off in 2000 - 500 = 1500 (ms)
 }
 /* USER CODE END 4 */
 

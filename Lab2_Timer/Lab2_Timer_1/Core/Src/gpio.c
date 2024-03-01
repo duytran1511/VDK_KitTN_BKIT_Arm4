@@ -19,8 +19,6 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include <led.h>
-
 #include "gpio.h"
 
 /* USER CODE BEGIN 0 */
