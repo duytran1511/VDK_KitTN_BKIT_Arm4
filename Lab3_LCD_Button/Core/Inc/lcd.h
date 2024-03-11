@@ -65,37 +65,44 @@ typedef struct {
 extern _lcd_dev lcddev;
 
 /* Functions */
+// Native library functions
 void lcd_set_cursor(uint16_t x, uint16_t y);
 void lcd_set_address(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2);
 void lcd_set_display_on(void);
 void lcd_set_display_off(void);
 uint16_t lcd_read_point(uint16_t x, uint16_t y);
-void lcd_clear(uint16_t color);
+void lcd_set_direction(uint8_t dir);
 
+// Clear LCD with color
+void lcd_clear(uint16_t color);
 void lcd_fill(uint16_t xsta, uint16_t ysta, uint16_t xend, uint16_t yend,
 		uint16_t color);
+
+// Show shapes and picture
 void lcd_draw_point(uint16_t x, uint16_t y, uint16_t color);
 void lcd_draw_line(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
 		uint16_t color);
 void lcd_draw_rectangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,
 		uint16_t color);
+void lcd_show_picture(uint16_t x, uint16_t y, uint16_t length, uint16_t width,
+		const uint8_t pic[]);
+void lcd_draw_circle(int xc, int yc, uint16_t c, int r, int fill);
 
+// Show char and string
 void lcd_show_char(uint16_t x, uint16_t y, uint8_t character, uint16_t fc,
 		uint16_t bc, uint8_t sizey, uint8_t mode);
+void lcd_show_string(uint16_t x, uint16_t y, char *str, uint16_t fc,
+		uint16_t bc, uint8_t sizey, uint8_t mode);
+void lcd_show_string_center(uint16_t x, uint16_t y, char *str, uint16_t fc,
+		uint16_t bc, uint8_t sizey, uint8_t mode);
+
+// Show number
 void lcd_show_int_num(uint16_t x, uint16_t y, uint16_t num, uint8_t len,
 		uint16_t fc, uint16_t bc, uint8_t sizey);
 void lcd_show_float_num(uint16_t x, uint16_t y, float num, uint8_t len,
 		uint16_t fc, uint16_t bc, uint8_t sizey);
 
-void lcd_show_picture(uint16_t x, uint16_t y, uint16_t length, uint16_t width,
-		const uint8_t pic[]);
-
-void lcd_set_direction(uint8_t dir);
+// Init LCD
 void lcd_init(void);
 
-void lcd_draw_circle(int xc, int yc, uint16_t c, int r, int fill);
-void lcd_show_string(uint16_t x, uint16_t y, char *str, uint16_t fc, uint16_t bc,
-		uint8_t sizey, uint8_t mode);
-void lcd_show_string_center(uint16_t x, uint16_t y, char *str, uint16_t fc, uint16_t bc,
-		uint8_t sizey, uint8_t mode);
 #endif /* INC_LCD_H_ */

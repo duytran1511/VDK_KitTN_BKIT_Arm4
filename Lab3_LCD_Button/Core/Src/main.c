@@ -105,6 +105,11 @@ int main(void) {
 
 	lcd_clear(WHITE);
 	TestLcd();
+
+	led_7seg_set_digit(1, 0, 0);
+	led_7seg_set_digit(2, 1, 0);
+	led_7seg_set_digit(3, 2, 0);
+	led_7seg_set_digit(4, 3, 0);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
@@ -168,10 +173,6 @@ void SystemClock_Config(void) {
 
 /* USER CODE BEGIN 4 */
 void init_system() {
-	HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 0);
-	HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 0);
-	HAL_GPIO_WritePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin, 0);
-
 	button_init();
 	led_7seg_init();
 	lcd_init();
@@ -183,17 +184,19 @@ void init_system() {
 	timer4_set(1);
 }
 
-// Button example 1: a button is pressed 1 time.
-int IsButtonDown(){
-	if(button_count[7] == 1){
+// Button example 1: a button is pressed 1 time (50ms).
+int IsButtonDown() {
+	if (button_count[0] == 1) {
 		return 1;
 	}
 	return 0;
 }
 
-// Button example 2: button pressing and button scrolling
-int IsButtonUp(){
-	if(button_count[3] == 1 || (button_count[3] > 20 && button_count[3] % 2 == 0 )){
+// Button example 2:
+// Check if a button is pressed 1 time (50ms),
+// or if it is held down for more than 1 second, in which case it returns 1 every 100ms.
+int IsButtonUp() {
+	if (button_count[1] == 1 || (button_count[1] > 20 && button_count[1] % 2 == 0)) {
 		return 1;
 	}
 	return 0;
@@ -205,11 +208,8 @@ void TestButtonMatrix() {
 			lcd_show_int_num(140, 105, i, 2, BRED, WHITE, 32);
 		}
 	}
-    if (IsButtonUp()) numberOfPushButton++;
-    if (IsButtonDown()) numberOfPushButton--;
-
-    lcd_show_int_num(40, 105, numberOfPushButton, 2, GREEN, WHITE, 32);
 }
+
 void TestLcd() {
 	lcd_fill(0, 0, 240, 20, BLUE);
 	lcd_show_string_center(0, 2, "Hello World !!!", RED, BLUE, 16, 1);

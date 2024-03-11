@@ -26,7 +26,7 @@ void led_7seg_init() {
 /**
  * @brief	Scan led 7 segment
  * @param	None
- * @note	Call in 1ms interrupt
+ * @note	Call in 1ms interrupt (Be called in default in Timer 4 callback function)
  * @retval 	None
  */
 void led_7seg_display() {

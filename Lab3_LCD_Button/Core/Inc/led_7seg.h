@@ -14,6 +14,10 @@
 extern void led_7seg_init();
 extern void led_7seg_set_digit(int num, int position, uint8_t show_dot);
 extern void led_7seg_set_colon(uint8_t status);
+/*
+ * Should be called every 1 ms
+ * --> This function is called by default in timer 4 callback function (software_timer.cpp)
+ */
 extern void led_7seg_display();
 
 extern void led_7seg_debug_turn_on(uint8_t index);
