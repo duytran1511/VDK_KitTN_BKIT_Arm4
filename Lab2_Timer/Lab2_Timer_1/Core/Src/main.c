@@ -112,6 +112,18 @@ int main(void) {
 			Led_Y0();
 			Led_Y1();
 			Led_Debug();
+
+			/*
+			 * This function should be called every 1ms.
+			 *
+			 * In every template, it is called in Timer 4
+			 * (function HAL_TIM_PeriodElapsedCallback in software_timer).
+			 *
+			 * However, I have just commented it and put it here (to be call every 50 ms)
+			 * to show that if the duration is not short enough,
+			 * the led 7 segment will not work correctly.
+			 */
+			led_7seg_display();
 		}
 		/* USER CODE END WHILE */
 
@@ -172,25 +184,25 @@ void init_system(void) {
 }
 
 void Led_Debug() {
-	statusLed_Y0 = (statusLed_Y0 + 1) % 20;	// Period = 50 (ms) * 20 = 1000 (ms)
-	if (statusLed_Y1 == 0)			// Turn on in (10 / 20) * 1000 = 500 (ms)
+	statusLed_Debug = (statusLed_Debug + 1) % 20;					// Period = 50 (ms) * 20 = 1000 (ms)
+	if (statusLed_Debug == 0)										// Turn on in (10 / 20) * 1000 = 500 (ms)
 		HAL_GPIO_TogglePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin);
 }
 
 void Led_Y0() {
-	statusLed_Y0 = (statusLed_Y0 + 1) % 20;	// Period = 50 (ms) * 20 = 1000 (ms)
-	if (statusLed_Y1 < 10)
-		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 1);// Turn on in (10 / 20) * 1000 = 500 (ms)
+	statusLed_Y0 = (statusLed_Y0 + 1) % 20;							// Period = 50 (ms) * 20 = 1000 (ms)
+	if (statusLed_Y0 < 10)
+		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 1);	// Turn on in (10 / 20) * 1000 = 500 (ms)
 	else
-		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 0);// Turn off in 1000 - 500 = 500 (ms)
+		HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, 0);	// Turn off in 1000 - 500 = 500 (ms)
 }
 
 void Led_Y1() {
-	statusLed_Y1 = (statusLed_Y1 + 1) % 40;	// Period = 50 (ms) * 40 = 2000 (ms)
+	statusLed_Y1 = (statusLed_Y1 + 1) % 40;							// Period = 50 (ms) * 40 = 2000 (ms)
 	if (statusLed_Y1 < 10)
-		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 1);// Turn on in (10 / 40) * 2000 = 500 (ms)
+		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 1);	// Turn on in (10 / 40) * 2000 = 500 (ms)
 	else
-		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 0);// Turn off in 2000 - 500 = 1500 (ms)
+		HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, 0);	// Turn off in 2000 - 500 = 1500 (ms)
 }
 /* USER CODE END 4 */
 

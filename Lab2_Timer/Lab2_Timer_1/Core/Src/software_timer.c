@@ -64,7 +64,7 @@ void timer4_set(int ms) {
 /**
  * @brief  	Timer interrupt routine
  * @param  	htim TIM Base handle
- * @note	This callback function is called by system
+ * @note	This callback function is called by default
  * @retval 	None
  */
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
@@ -97,7 +97,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 			}
 		}
 
-		led_7seg_display();
+		// led_7seg_display();
 	}
 }
 
