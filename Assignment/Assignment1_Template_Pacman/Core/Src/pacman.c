@@ -56,7 +56,7 @@ void ghost_moving_process(void);
 S_MAZE maze;
 void pac_dot_draw(uint8_t i, uint8_t j, uint16_t color);
 
-// Game object
+// Game Engine object
 void game_draw(void);
 void game_handler(void);
 
