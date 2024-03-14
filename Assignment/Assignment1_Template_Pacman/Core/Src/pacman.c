@@ -144,6 +144,8 @@ void game_draw(void) {
 	 * 2. Because ghosts cannot eat pac dot, so you should redraw the pac dot at the location the ghost just passed.
 	 * 3. Then draw Pac-Man and Ghost at the new location.
 	 * 4. Finally, update the new score.
+	 *
+	 * Hint: Draw based on current and previous positions stored in i, j, i_pre, j_pre.
 	 */
 
 }
@@ -205,7 +207,8 @@ void ghost_direction_process(void) {
 	/*
 	 * TO DO
 	 *
-	 * Make Ghost will move randomly (change direction randomly).
+	 * Make Ghost will move randomly
+	 * Hint: change direction randomly
 	 */
 	static E_DIRECTION direction;
 
@@ -239,7 +242,7 @@ void ghost_moving_process(void) {
 	/*
 	 * TO DO
 	 *
-	 * Update Pac-Man's current and previous position based on current direction.
+	 * Update Ghost's current and previous position based on current direction.
 	 */
 
 	switch (ghost.direction) {
