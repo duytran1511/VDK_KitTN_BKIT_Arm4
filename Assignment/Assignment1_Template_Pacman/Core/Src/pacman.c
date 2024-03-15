@@ -255,8 +255,12 @@ void ghost_moving_process(void) {
 
 		break;
 
+	case STOP:
+
+		break;
+
 	default:
-		ghost.direction = UP;
+		ghost.direction = STOP;
 		break;
 	}
 }
