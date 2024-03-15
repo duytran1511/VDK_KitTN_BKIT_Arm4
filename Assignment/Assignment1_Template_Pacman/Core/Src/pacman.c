@@ -205,7 +205,7 @@ void ghost_direction_process(void) {
 	 * Make Ghost move randomly.
 	 * Hint: Change direction randomly.
 	 */
-	static E_DIRECTION direction;
+	static E_DIRECTION new_direction;
 
 	switch (ghost.direction) {
 	case UP:
@@ -228,7 +228,7 @@ void ghost_direction_process(void) {
 		break;
 	}
 
-	ghost.direction = direction;
+	ghost.direction = new_direction;
 }
 
 void ghost_moving_process(void) {
