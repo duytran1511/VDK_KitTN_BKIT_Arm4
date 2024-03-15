@@ -123,14 +123,14 @@ void game_process(void) {
 	static uint8_t counter_game = 0;
 	counter_game = (counter_game + 1) % 5;
 
-	pacman_direction_process();
+	pacman_direction_process(); // Put this function here to read buttons.
 
 	if (counter_game == 0) {
 		pacman_moving_process();
+		ghost_direction_process();
 		ghost_moving_process();
 
 		game_handler();
-
 		game_draw();
 	}
 }
@@ -140,14 +140,10 @@ void game_draw(void) {
 	/*
 	 * TO DO
 	 *
-	 * 1. First of all, you should delete the image at the character's old location (Pac-Man and Ghost).
-	 * 2. Because ghosts cannot eat pac dot, so you should redraw the pac dot at the location the ghost just passed.
-	 * 3. Then draw Pac-Man and Ghost at the new location.
-	 * 4. Finally, update the new score.
+	 * Draw Pac-Man, Ghost, and Pac Dots.
 	 *
-	 * Hint: Draw based on current and previous positions stored in i, j, i_pre, j_pre.
+	 * Hint: Remember to delete the object in the previous position, before drawing the new one.
 	 */
-
 }
 
 void game_handler(void) {
@@ -156,18 +152,16 @@ void game_handler(void) {
 	 *
 	 * 1. Check the loss condition, show something, and restart the game.
 	 * 2. Check the win condition, show something, and restart the game.
-	 * 3. Check if Pac-Man has won any dots or not, and update the score.
+	 * 3. Check if Pac-Man has won any dots or not, then update the score.
 	 */
-
 }
 
 void pacman_direction_process(void) {
 	/*
 	 * TO DO
 	 *
-	 * Let's user use button to control Pac-Man.
+	 * Let user use button to control Pac-Man.
 	 */
-
 }
 
 void pacman_moving_process(void) {
@@ -175,6 +169,7 @@ void pacman_moving_process(void) {
 	 * TO DO
 	 *
 	 * Update Pac-Man's current and previous position based on current direction.
+	 *
 	 */
 	switch (pacman.direction) {
 	case UP:
@@ -207,8 +202,8 @@ void ghost_direction_process(void) {
 	/*
 	 * TO DO
 	 *
-	 * Make Ghost will move randomly
-	 * Hint: change direction randomly
+	 * Make Ghost move randomly.
+	 * Hint: Change direction randomly.
 	 */
 	static E_DIRECTION direction;
 
@@ -237,8 +232,6 @@ void ghost_direction_process(void) {
 }
 
 void ghost_moving_process(void) {
-	ghost_direction_process();
-
 	/*
 	 * TO DO
 	 *

@@ -173,6 +173,9 @@ void init_system() {
 	timer2_init();
 	timer2_set(50);
 
+	timer4_init();
+	timer4_set(1);
+
 	game_init();
 }
 
