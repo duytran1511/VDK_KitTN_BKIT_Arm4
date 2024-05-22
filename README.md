@@ -35,4 +35,4 @@
 
 [Hướng dẫn sử dụng nhanh Kit Thí nghiệm BKIT ARM4](https://abcsolutions.com.vn/wp-content/uploads/2023/11/KitThiNghiem_STM32_ARM4_QuickStartGuide_20231027_1027.pdf)
 
-[Tài liệu chia sẻ sinh viên](https://drive.google.com/drive/folders/1-nrxDofZvNRVR-uWFto3qvDx2LCEXZcE?usp=sharing)
+[(Drive) Tài liệu chia sẻ sinh viên](https://drive.google.com/drive/folders/1-nrxDofZvNRVR-uWFto3qvDx2LCEXZcE?usp=sharing)
